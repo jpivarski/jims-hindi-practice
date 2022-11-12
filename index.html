@@ -3,8 +3,32 @@
   <head>
     <meta charset="utf-8">
     <title>Jim's Hindi practice</title>
+    <style>
+.half {
+  width: 45%;
+  border: none;
+  margin: none;
+  padding: none;
+  font-size: 24px;
+}
+.whole {
+  width: 100%;
+  border: none;
+  margin: none;
+  padding: none;
+  font-size: 24px;
+}
+    </style>
   </head>
   <body>
-    <p>There!</p>
-  </body>
+    <div style="margin: 10px;">
+        <div>
+          <input type="text" id="word" class="half" value="किताब" readonly>
+          <input type="text" id="word" class="half" value="book" readonly>
+        </div>
+        <div style="margin-top: 10px;">
+          <input type="text" id="response" class="whole" value="किताब">
+        </div>
+      </div>
+    </body>
 </html>
