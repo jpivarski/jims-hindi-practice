@@ -7,7 +7,7 @@
 .half {
   border: 0px;
   margin: 0px;
-  padding: 11px;
+  padding: 31px;
   font-size: 96px;
 }
 
@@ -15,21 +15,27 @@
   width: 100%;
   border: 1px solid black;
   margin: 0px;
-  padding: 10px;
+  padding: 30px;
   font-size: 96px;
 }
     </style>
   </head>
   <body>
     <div style="margin: 30px;">
-        <div>
-          <span id="translation" style="float: right; font-size: 24px">book</span>
+        <div style="font-size: 24px;">
+          <span id="translation" style="float: right;">book</span>
+          <form action="javascript:void(0);">
+            <input type="radio" id="html" name="which" value="words" checked>
+            <label for="words">words</label>
+            <input type="radio" id="css" name="which" value="letters">
+            <label for="letters">letters</label>
+          </form>
           <br clear="right">
           <span id="word" class="half">किताब</span>
         </div>
         <div style="margin-top: 30px;">
           <input type="text" id="response" class="whole" value="किताब">
         </div>
-      </div>      
+      </div>
     </body>
 </html>
