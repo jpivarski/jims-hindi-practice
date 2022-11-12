@@ -22,25 +22,25 @@
   </head>
   <body>
     <div style="margin: 30px;">
-        <div style="margin: 30px;">
-            <div style="font-size: 24px;">
-              <span id="translation" style="float: right;">book</span>
-              <form action="javascript:void(0);">
+        <div style="font-size: 24px;">
+            <span id="translation" style="float: right;">book</span>
+            <form action="javascript:void(0);">
                 <input type="radio" id="words" name="which" value="words" checked>
                 <label for="words">words</label>
                 <input type="radio" id="letters" name="which" value="letters">
                 <label for="letters">letters</label>
-              </form>
-              <br clear="right">
-              <span id="word" class="half">किताब</span>
-            </div>
-            <div style="margin-top: 30px;">
-              <form action="javascript:void(0);">
-                <input type="text" id="response" class="whole" value="किताब">
-              </form>
-            </div>
+            </form>
+            <br clear="right">
+            <span id="word" class="half">किताब</span>
         </div>
-        <script>
+        <div style="margin-top: 30px;">
+            <form action="javascript:void(0);" autocomplete="off">
+                <input autocomplete="false" name="hidden" type="text" style="display: none;">
+                <input type="text" id="response" class="whole" value="किताब">
+            </form>
+        </div>
+    </div>
+    <script>
 var letter_list = [
     ["क", ""],
 ];
@@ -52,21 +52,26 @@ var word_list = [
 
 var response = document.getElementById("response");
 
-response.addEventListener("keyup", function(event) {
+response.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-    event.preventDefault();
-    var choices = document.getElementsByName("which");
-    var which_list = word_list;
-    for (choice of choices) {
-        if (choice.checked && choice.value == "letters") {
-            which_list = letter_list;
+        event.preventDefault();
+        var choices = document.getElementsByName("which");
+        var which_list = word_list;
+        for (var choice of choices) {
+            if (choice.checked && choice.value == "letters") {
+                which_list = letter_list;
+            }
         }
-    }
-    var item = which_list[Math.floor(Math.random()*which_list.length)];
+        var item = which_list[Math.floor(Math.random() * which_list.length)];
 
-    document.getElementById("word").textContent = item[0];
-    document.getElementById("translation").textContent = item[1];
-    document.getElementById("response").value = "";
+        document.getElementById("word").textContent = item[0];
+        document.getElementById("translation").textContent = item[1];
+        document.getElementById("response").value = "";
+
+        var speak = new SpeechSynthesisUtterance();
+        speak.text = item[0];
+        speak.lang = "hi-IN";
+        window.speechSynthesis.speak(speak);
     }
 });
         </script>
