@@ -1,2 +1,3 @@
 # jims-hindi-practice
-Jim's Hindi practice
+
+https://jpivarski.github.io/jims-hindi-practice
