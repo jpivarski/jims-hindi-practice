@@ -5,30 +5,31 @@
     <title>Jim's Hindi practice</title>
     <style>
 .half {
-  width: 45%;
-  border: none;
-  margin: none;
-  padding: none;
-  font-size: 24px;
+  border: 0px;
+  margin: 0px;
+  padding: 11px;
+  font-size: 96px;
 }
+
 .whole {
   width: 100%;
-  border: none;
-  margin: none;
-  padding: none;
-  font-size: 24px;
+  border: 1px solid black;
+  margin: 0px;
+  padding: 10px;
+  font-size: 96px;
 }
     </style>
   </head>
   <body>
-    <div style="margin: 10px;">
+    <div style="margin: 30px;">
         <div>
-          <input type="text" id="word" class="half" value="किताब" readonly>
-          <input type="text" id="word" class="half" value="book" readonly>
+          <span id="translation" style="float: right; font-size: 24px">book</span>
+          <br clear="right">
+          <span id="word" class="half">किताब</span>
         </div>
-        <div style="margin-top: 10px;">
+        <div style="margin-top: 30px;">
           <input type="text" id="response" class="whole" value="किताब">
         </div>
-      </div>
+      </div>      
     </body>
 </html>
