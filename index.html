@@ -1780,7 +1780,7 @@ response.addEventListener("keyup", function (event) {
         }
         var item = null;
         while (item === null) {
-            item = which_list[Math.floor(Math.random() * which_list.length)];
+            item = which_list[Math.floor(Math.sqrt(Math.random()) * which_list.length)];
             if (item.length == 3  &&  !document.getElementById(item[2]).checked) {
                 item = null;
             }
