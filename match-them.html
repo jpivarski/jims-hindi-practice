@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jim's Hindi practice (match them)</title>
+    <style>
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow: hidden;
+}
+
+.filler {
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.button {
+  height: 12%;
+  margin-top: 20px;
+  border: 2px gray solid;
+  background-color: #f0f0f0;
+}
+
+.button-text {
+  position: relative;
+  bottom: 10px;
+  text-align: center;
+  font-size: 72px;
+}
+
+    </style>
+  </head>
+  <body>
+    <div>
+  <div class="split" style="left: 0; margin-left: 10px;">
+    <div class="filler">
+      <div class="button" id="hi-0">
+        <div class="button-text" id="hi-0-text">
+          एक
+        </div>
+      </div>
+      <div class="button" id="hi-1">
+        <div class="button-text" id="hi-1-text">
+          दो
+        </div>
+      </div>
+      <div class="button" id="hi-2">
+        <div class="button-text" id="hi-2-text">
+          तीन
+        </div>
+      </div>
+      <div class="button" id="hi-3">
+        <div class="button-text" id="hi-3-text">
+          चार
+        </div>
+      </div>
+      <div class="button" id="hi-4">
+        <div class="button-text" id="hi-4-text">
+          पाँच
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="split" style="right: 0; margin-right: 10px;">
+    <div class="filler">
+      <div class="button" id="en-0">
+        <div class="button-text" id="en-0-text">
+          one
+        </div>
+      </div>
+      <div class="button" id="en-1">
+        <div class="button-text" id="en-1-text">
+          two
+        </div>
+      </div>
+      <div class="button" id="en-2">
+        <div class="button-text" id="en-2-text">
+          three
+        </div>
+      </div>
+      <div class="button" id="en-3">
+        <div class="button-text" id="en-3-text">
+          four
+        </div>
+      </div>
+      <div class="button" id="en-4">
+        <div class="button-text" id="en-4-text">
+          five
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <script>
+
+var word_list = [
+// https://app.memrise.com/course/2149803/hindi-duolingo-part-2-basics/
+
+    ["एक", "one", "number"],
+//    ["यह", "this", "pronoun"],
+//    ["है", "is", "verb"],
+//    ["वह", "that", "pronoun"],
+//    ["किताब", "book", "noun"],
+//    ["औरत", "woman", "noun"],
+//    ["और", "and", "other"],
+//    ["आदमी", "man", "noun"],
+    ["सेब", "apple", "noun"],
+//    ["नेहा", "Neha", "name"],
+//    ["राज", "Raj", "name"],
+//    ["पीटर", "Peter", "name"],
+//    ["जूलिया", "Julia", "name"],
+//    ["मैं", "I", "pronoun"],
+//    ["हूँ", "am", "verb"],
+    ["ठीक", "fine/okay", "adjective"],
+//    ["लड़का", "boy", "noun"],
+//    ["लड़की", "girl", "noun"],
+    ["खाता", "to eat", "verb"],
+    ["पढ़ता", "to read", "verb"],
+    ["पीता", "to drink", "verb"],
+    ["केला", "banana", "noun"],
+    ["पानी", "water", "noun"],
+    ["पढ़ती", "to read", "verb"],
+    ["पीती", "to drink", "verb"],
+    ["खाती", "to eat", "verb"],
+//    ["चाय", "tea", "noun"],
+    ["हाँ", "yes", "other"],
+    ["नहीं", "no", "other"],
+    ["नमस्ते", "hi/bye", "other"],
+    ["धन्यवाद", "thanks", "other"],
+    ["क्या", "what", "question"],
+    ["कौन", "who", "question"],
+//    ["औरतें", "women", "noun"],
+    ["दो", "two", "number"],
+    ["तीन", "three", "number"],
+    ["खाते", "to eat", "verb"],
+    ["पीते", "to drink", "verb"],
+    ["तू", "you (intimate)", "pronoun"],
+    ["तुम", "you (semi)", "pronoun"],
+    ["हो", "are (semi)", "pronoun"],
+    ["हम", "we", "pronoun"],
+//    ["हैं", "are", "verb"],
+    ["पढ़ते", "read", "verb"],
+//    ["किताबें", "books", "noun"],
+//    ["लड़कियाँ", "girls", "noun"],
+//    ["लड़के", "boys", "noun"],
+//    ["भारत", "India", "name"],
+    ["रहता", "to live", "verb"],
+    ["रहती", "to live", "verb"],
+//    ["से", "from", "postposition"],
+//    ["में", "in", "postposition"],
+//    ["अमेरिका", "America", "name"],
+//    ["घर", "home", "noun"],
+//    ["मेरा", "my", "genitive"],
+    ["तेरा", "your (intimate)", "genitive"],
+//    ["नाम", "name", "noun"],
+    ["उसका", "its", "genitive"],
+//    ["बेटा", "son", "noun"],
+//    ["भाई", "brother", "noun"],
+//    ["बहन", "sister", "noun"],
+    ["हर", "every", "other"],
+    ["दिन", "day", "noun"],
+//    ["स्कूल", "school", "noun"],
+//    ["जाता", "to go", "verb"],
+//    ["बेटी", "daughter", "noun"],
+//    ["की", "of (genitive)", "genitive"],
+//    ["का", "of (genitive)", "genitive"],
+//    ["के", "of (genitive)", "genitive"],
+    ["मेरे", "my", "genitive"],
+    ["तेरे", "your (intimate)", "genitive"],
+    ["तेरी", "your (intimate)", "genitive"],
+    ["उसकी", "its", "genitive"],
+    ["उसके", "its", "genitive"],
+//    ["बेटियाँ", "daughters", "noun"],
+//    ["बेटे", "sons", "noun"],
+//    ["बहनें", "sisters", "noun"],
+//    ["भाई", "brothers", "noun"],
+    ["उनका", "their (formal)", "genitive"],
+    ["उनकी", "their (formal)", "genitive"],
+    ["उनके", "their (formal)", "genitive"],
+//    ["माँ", "mother", "noun"],
+//    ["पिता", "father", "noun"],
+    ["आप", "you (formal)", "pronoun"],
+//    ["हैं", "are (formal)", "verb"],
+    ["आपका", "your (formal)", "genitive"],
+    ["आपकी", "your (formal)", "genitive"],
+    ["आपके", "your (formal)", "genitive"],
+//    ["बच्ची", "child", "noun"],
+//    ["बच्चा", "child", "noun"],
+//    ["बच्चे", "children", "noun"],
+    ["तुम्हारा", "your (semi)", "genitive"],
+    ["तुम्हारी", "your (semi)", "genitive"],
+    ["तुम्हारे", "your (semi)", "genitive"],
+//    ["दोस्त", "friend", "noun"],
+//    ["दादी", "paternal grandmother", "noun"],
+//    ["दादा", "paternal grandfather", "noun"],
+//    ["आमिर", "Aamir", "name"],
+//    ["आता", "to come", "verb"],
+//    ["आती", "to come", "verb"],
+//    ["आते", "to come", "verb"],
+//    ["जाते", "to go", "verb"],
+//    ["नाना", "maternal grandfather", "noun"],
+//    ["नानी", "maternal grandmother", "noun"],
+    ["हमारा", "our", "genitive"],
+    ["हमारी", "our", "genitive"],
+    ["हमारे", "our", "genitive"],
+    ["अपना", "(reflexive)", "genitive"],
+    ["अपनी", "(reflexive)", "genitive"],
+    ["अपने", "(reflexive)", "genitive"],
+    ["के साथ", "with/have", "verb"],
+//    ["बिल्ली", "cat", "noun"],
+//    ["गाय", "cow", "noun"],
+//    ["काली", "black", "color"],
+    ["छोटी", "small", "adjective"],
+    ["बड़ी", "big", "adjective"],
+    ["छोटा", "small", "adjective"],
+//    ["काला", "black", "color"],
+    ["कुत्ता", "dog", "noun"],
+    ["चूहा", "rat/mouse", "noun"],
+    ["बड़ा", "big", "adjective"],
+    ["कुत्ते", "dogs", "noun"],
+    ["चूहे", "rats/mice", "noun"],
+//    ["दूध", "milk", "noun"],
+//    ["बिल्लियाँ", "cats", "noun"],
+//    ["गायें", "cows", "noun"],
+//    ["काले", "black", "color"],
+    ["बड़े", "big", "adjective"],
+    ["छोटे", "small", "adjective"],
+//    ["घास", "grass", "noun"],
+    ["हाथी", "elephant", "noun"],
+    ["घोड़ा", "horse", "noun"],
+    ["घोड़े", "horses", "noun"],
+    ["जानवर", "animal", "noun"],
+    ["पक्षी", "bird", "noun"],
+    ["मोर", "peacock", "noun"],
+    ["कबूतर", "pigeon", "noun"],
+    ["उड़ता", "to fly", "verb"],
+    ["उड़ते", "to fly", "verb"],
+//    ["पर", "on", "postposition"],
+    ["चलता", "to walk", "verb"],
+    ["चलती", "to walk", "verb"],
+    ["चलते", "to walk", "verb"],
+    ["दौड़ता", "to run", "verb"],
+    ["दौड़ती", "to run", "verb"],
+    ["दौड़ते", "to run", "verb"],
+    ["मेज़", "table", "noun"],
+    ["सड़क", "road", "noun"],
+    ["कुर्सी", "chair", "noun"],
+    ["नदी", "river", "noun"],
+    ["तैरता", "to swim", "verb"],
+    ["तैरती", "to swim", "verb"],
+    ["तैरते", "to swim", "verb"],
+    ["खड़ा", "to stand", "verb"],
+    ["बैठा", "to sit", "verb"],
+    ["दौड़ रहा", "is running", "verb"],
+    ["तैर रहा", "is swimming", "verb"],
+    ["चल रहा", "is walking", "verb"],
+    ["आ रहा", "is coming", "verb"],
+    ["जा रहा", "is going", "verb"],
+    ["खड़ी रहा", "is standing", "verb"],
+    ["बैठी रहा", "is sitting", "verb"],
+    ["आज", "today", "other"],
+    ["बैठे रहा", "is sitting", "verb"],
+    ["खड़े रहा", "is standing", "verb"],
+    ["देखता", "to see/watch", "verb"],
+    ["देखती", "to see/watch", "verb"],
+    ["देखते", "to see/watch", "verb"],
+    ["देख रहा", "is seeing/watching", "verb"],
+    ["खेलता", "to play", "verb"],
+    ["खेलती", "to play", "verb"],
+    ["खेलते", "to play", "verb"],
+    ["खेल", "game", "noun"],
+    ["कर रहा", "is doing", "verb"],
+    ["करता", "to do", "verb"],
+    ["करती", "to do", "verb"],
+    ["करते", "to do", "verb"],
+    ["काम", "work", "verb"],
+    ["लंबा", "tall", "adjective"],
+    ["कैसा", "how", "question"],
+    ["अच्छा", "good", "adjective"],
+    ["बुरा", "bad", "adjective"],
+    ["बहुत", "very", "other"],
+    ["कैसी", "how", "question"],
+    ["कैसे", "how", "question"],
+    ["अच्छी", "good", "adjective"],
+    ["बुरी", "bad", "adjective"],
+    ["लंबी", "tall", "adjective"],
+    ["बुरे", "bad", "adjective"],
+    ["अच्छे", "good", "adjective"],
+    ["लंबे", "tall", "adjective"],
+    ["लोग", "people", "noun"],
+    ["ख़ुश", "happy", "adjective"],
+    ["दुखी", "sad", "adjective"],
+    ["सफ़ेद", "white", "color"],
+    ["लाल", "red", "color"],
+    ["सुंदर", "beautiful", "adjective"],
+    ["जवान", "young", "adjective"],
+    ["नीला", "blue", "color"],
+    ["नीली", "blue", "color"],
+    ["हरा", "green", "color"],
+    ["हरी", "green", "color"],
+    ["हरे", "green", "color"],
+    ["पीला", "yellow", "color"],
+    ["पीली", "yellow", "color"],
+    ["पीले", "yellow", "color"],
+    ["पतला", "thin", "adjective"],
+    ["पतली", "thin", "adjective"],
+    ["पतले", "thin", "adjective"],
+    ["मोटा", "fat", "adjective"],
+    ["मोटी", "fat", "adjective"],
+    ["मोटे", "fat", "adjective"],
+    ["बूढ़ा", "old", "adjective"],
+    ["बूढ़ी", "old", "adjective"],
+    ["बूढ़े", "old", "adjective"],
+    ["आलू", "potato", "noun"],
+    ["फल", "fruit", "noun"],
+    ["शराब", "alcohol", "noun"],
+    ["संतरा", "orange (n)", "noun"],
+    ["संतरे", "oranges", "noun"],
+    ["टमाटर", "tomato", "noun"],
+    ["खाना", "food", "noun"],
+    ["अंडा", "egg", "noun"],
+    ["अंडे", "eggs", "noun"],
+    ["चावल", "rice", "noun"],
+    ["आम", "mango", "noun"],
+    ["चाहिए", "to want", "verb"],
+    ["नींबू", "lemon", "noun"],
+    ["गाजर", "carrot", "noun"],
+    ["मछली", "fish", "noun"],
+    ["सलाद", "salad", "noun"],
+    ["पसंद", "to like", "verb"],
+    ["सब्ज़ी", "vegetable", "noun"],
+    ["सब्ज़ियाँ", "vegetables", "noun"],
+    ["नाश्ता", "breakfast", "noun"],
+    ["गरम", "hot", "adjective"],
+    ["ठंडा", "cold", "adjective"],
+    ["ठंडे", "cold", "adjective"],
+    ["देता", "to give", "verb"],
+    ["देती", "to give", "verb"],
+    ["देते", "to give", "verb"],
+    ["चाहता", "to want", "verb"],
+    ["चाहती", "to want", "verb"],
+    ["चाहते", "to want", "verb"],
+    ["लेता", "to take", "verb"],
+    ["लेती", "to take", "verb"],
+    ["लेते", "to take", "verb"],
+    ["आठ", "eight", "number"],
+    ["चार", "four", "number"],
+    ["छह", "six", "number"],
+    ["दस", "ten", "number"],
+    ["हज़ार", "thousand", "number"],
+    ["कई", "many", "number"],
+    ["कितना", "how much?", "question"],
+    ["कितने", "how many", "question"],
+    ["कितनी", "how many", "question"],
+    ["कुछ", "some", "number"],
+    ["नौ", "nine", "number"],
+    ["पाँच", "five", "number"],
+    ["सात", "seven", "number"],
+    ["सौ", "hundred", "number"],
+
+// // https://app.memrise.com/course/2109698/hindi-duolingo-part-4-advanced/
+
+//     ["चीनी", "sugar", "noun"],
+//     ["तेल", "oil", "noun"],
+//     ["नमक", "salt", "noun"],
+//     ["नमकीन", "salty", "adjective"],
+//     ["मीठा", "sweet", "adjective"],
+//     ["मीठी", "sweet", "adjective"],
+//     ["गिलास", "glass", "noun"],
+//     ["बोतल", "bottle", "noun"],
+//     ["चाकू", "knife", "noun"],
+//     ["चम्मच", "spoon", "noun"],
+//     ["चम्मचें", "spoons", "noun"],
+//     ["माँसाहारी", "non-vegetarian", "adjective"],
+//     ["शाकाहारी", "vegetarian", "adjective"],
+//     ["भूखा", "hungry", "adjective"],
+//     ["भूखी", "hungry", "adjective"],
+//     ["भूखे", "hungry", "adjective"],
+//     ["प्यासा", "thirsty", "adjective"],
+//     ["प्यासी", "thirsty", "adjective"],
+//     ["प्यासे", "thirsty", "adjective"],
+//     ["थी", "was", "verb"],
+//     ["थीं", "was", "verb"],
+//     ["था", "was", "verb"],
+//     ["थे", "was", "verb"],
+//     ["पहले", "ago/earlier", "other"],
+//     ["रहा था", "was (progressive)", "verb"],
+//     ["रही थी", "was (progressive)", "verb"],
+//     ["रहे थे", "was (progressive)", "verb"],
+//     ["परसों", "two days from now", "other"],
+//     ["ख़ुशबू", "fragrant", "adjective"],
+//     ["पत्ता", "leaf", "noun"],
+//     ["पत्ते", "leaves", "noun"],
+//     ["पेड़", "tree", "noun"],
+//     ["पौधा", "plant", "noun"],
+//     ["पौधे", "plants", "noun"],
+//     ["फूल", "flower", "noun"],
+//     ["तारा", "star", "noun"],
+//     ["चाँद", "moon", "noun"],
+//     ["तारे", "stars", "noun"],
+//     ["पक्षियों", "birds", "noun"],
+//     ["सूरज", "sun", "noun"],
+//     ["आसमान", "sky", "noun"],
+//     ["आज रात", "tonight", "other"],
+//     ["आग", "fire", "noun"],
+//     ["बादल", "cloud", "noun"],
+//     ["तालाब", "lake/pond", "noun"],
+//     ["हवा", "air", "noun"],
+//     ["रोते", "to cry", "verb"],
+//     ["रो रहे", "is crying", "verb"],
+//     ["हँस रहा", "is laughing", "verb"],
+//     ["हँस रही", "is laughing", "verb"],
+
+// // https://duome.eu/vocabulary/en/hi/skills
+
+// // Activity
+// ["आ रहा", "coming"],
+// ["आ रहे", "are coming"],
+// ["आ रही", "is coming"],
+// ["आज", "today"],
+// ["बैठा", "sat"],
+// ["बैठे", "sitting"],
+// ["बैठी", "sitting"],
+// ["चल रहा", "moving"],
+// ["चल रहे", "ongoing"],
+// ["चल रही", "going on"],
+// ["दौड़ रहा", "running"],
+// ["दौड़ रहे", "are running"],
+// ["दौड़ रही", "running"],
+// ["जा रहा", "going"],
+// ["जा रहे", "are going"],
+// ["जा रही", "going"],
+// ["काम", "work"],
+// ["खड़ा", "stand"],
+// ["खड़े", "standing"],
+// ["खड़ी", "vertical"],
+// ["खेल", "play"],
+// ["कुर्सी", "chair"],
+// ["मेज़", "table"],
+// ["नदी", "river"],
+// ["पास", "near"],
+// ["पर", "feather"],
+// ["सड़क", "street"],
+// ["तैर रहा", "swimming"],
+// ["तैर रहे", "are swimming"],
+// ["तैर रही", "swimming"],
+
+// // Adjectives
+// ["अच्छा", "good"],
+// ["अच्छे", "good"],
+// ["अच्छी", "good"],
+// ["बहुत", "very"],
+// ["बुरा", "bad"],
+// ["बुरे", "bad"],
+// ["बुरी", "bad"],
+// ["छोटा", "small"],
+// ["छोटी", "small"],
+// ["दुखी", "sad"],
+// ["जवान", "young"],
+// ["कैसा", "how?"],
+// ["कैसे", "how"],
+// ["कैसी", "how"],
+// ["ख़ुश", "happy"],
+// ["लंबा", "long"],
+// ["लंबे", "long"],
+// ["लंबी", "long"],
+// ["लाल", "red"],
+// ["लोग", "people"],
+// ["सफ़ेद", "white"],
+// ["सुंदर", "beautiful"],
+
+// // Animals
+// ["बड़ा", "big"],
+// ["बड़े", "elder"],
+// ["बड़ी", "big"],
+// ["बिल्ली", "cat"],
+// ["बिल्लियाँ", "cats"],
+// ["छोटे", "small"],
+// ["चूहा", "rat"],
+// ["चूहे", "mice"],
+// ["दूध", "milk"],
+// ["गाय", "cow"],
+// ["गायें", "cows"],
+// ["घास", "grass"],
+// ["हाथी", "elephant"],
+// ["होता", "would"],
+// ["होते", "would have"],
+// ["होती", "would have"],
+// ["जानवर", "beast"],
+// ["काला", "black"],
+// ["काले", "black"],
+// ["काली", "black"],
+// ["कबूतर", "pigeon"],
+// ["कुत्ता", "dog"],
+// ["कुत्ते", "dogs"],
+// ["मोर", "peacock"],
+// ["पक्षी", "bird"],
+
+// // Basics-1
+// ["आदमी", "man"],
+// ["और", "and"],
+// ["औरत", "women"],
+// ["है", "is"],
+// ["हूँ", "am"],
+// ["किताब", "book"],
+// ["लड़का", "boy"],
+// ["लड़की", "girl"],
+// ["मैं", "i"],
+// ["सेब", "apple"],
+// ["ठीक", "well"],
+// ["वह", "he"],
+// ["यह", "this"],
+
+// // Basics-2
+// ["चाय", "tea"],
+// ["धन्यवाद", "thank you"],
+// ["हाँ", "yes"],
+// ["कौन", "who?"],
+// ["केला", "banana"],
+// ["खाता", "account"],
+// ["खाती", "eats"],
+// ["नहीं", "no"],
+// ["नमस्ते", "greetings!"],
+// ["पानी", "water"],
+// ["पढ़ता", "reads"],
+// ["पढ़ती", "studies"],
+// ["पीता", "drinks"],
+// ["पीती", "drinks"],
+// ["तू", "you"],
+
+// // Comparison
+// ["आपसे", "from you"],
+// ["आराम", "rest"],
+// ["बेहतर", "better"],
+// ["भी", "too"],
+// ["धीरे", "slow"],
+// ["ज़्यादा", "more"],
+// ["कम", "low"],
+// ["सबसे", "to all"],
+// ["तेज़", "fast"],
+// ["तुझसे", "from you"],
+// ["तुमसे", "from you"],
+// ["उनसे", "from them"],
+
+// // Conversations
+// ["अँग्रेज़ी", "English"],
+// ["अगर", "if"],
+// ["बात", "thing"],
+// ["दोनों", "both"],
+// ["हिंदी", "Hindi"],
+// ["इसलिये", "that's why"],
+// ["कि", "that"],
+// ["किस", "what"],
+// ["किसी", "any"],
+// ["कोई", "any"],
+// ["क्योंकि", "because"],
+// ["लेकिन", "but"],
+// ["सब", "all"],
+// ["शायद", "perhaps"],
+// ["सुनो", "listen"],
+// ["तो", "so"],
+
+// // Day_Month
+// ["अगस्त", "August"],
+// ["अक्टूबर", "October"],
+// ["अप्रैल", "April"],
+// ["बुधवार", "Wednesday"],
+// ["दिसंबर", "December"],
+// ["गुरुवार", "Thursday"],
+// ["जनवरी", "January"],
+// ["जुलाई", "July"],
+// ["जून", "June"],
+// ["मंगलवार", "Tuesday"],
+// ["मार्च", "March"],
+// ["मई", "May"],
+// ["नवंबर", "November"],
+// ["फ़रवरी", "February"],
+// ["रविवार", "Sunday"],
+// ["साल", "year"],
+// ["शनिवार", "Saturday"],
+// ["शुक्रवार", "Friday"],
+// ["सितंबर", "September"],
+// ["सोमवार", "Monday"],
+
+// // Family
+// ["आप", "you"],
+// ["अपना", "my"],
+// ["अपने", "our"],
+// ["अपनी", "own"],
+// ["बच्चे", "children"],
+// ["बेटे", "sons"],
+// ["बेटियाँ", "daughters"],
+// ["बहनें", "sisters"],
+// ["दादा", "grandpa"],
+// ["दादी", "grandmother"],
+// ["दोस्त", "friend"],
+// ["जाते", "go to"],
+// ["के", "of"],
+// ["माँ", "mother"],
+// ["मेरे", "my"],
+// ["नाना", "grandfather"],
+// ["नानी", "maternal grandmother"],
+// ["पिता", "father"],
+// ["रहते", "living"],
+// ["साथ", "with"],
+// ["तेरे", "your"],
+// ["तुम्हारा", "your"],
+// ["तुम्हारे", "your"],
+// ["तुम्हारी", "your"],
+// ["उनका", "their"],
+// ["उनके", "their"],
+// ["उनकी", "their"],
+// ["उसके", "his"],
+
+// // Family2
+// ["भाई-बहन", "siblings"],
+// ["बुआ", "auntie"],
+// ["चाचा", "uncle"],
+// ["चाची", "aunt"],
+// ["मामा", "uncle"],
+// ["मामी", "aunt"],
+// ["माता-पिता", "parents"],
+// ["मौसा", "warts"],
+// ["मौसी", "aunt"],
+// ["पड़ोसी", "neighborhood"],
+// ["फूफा", "uncle"],
+// ["परिवार", "family"],
+// ["पति", "husband"],
+// ["पत्नी", "wife"],
+// ["प्यार", "love"],
+// ["रिश्ता", "relationship"],
+// ["रिश्तेदार", "relative"],
+
+// // Food
+// ["आलू", "potato"],
+// ["आम", "common"],
+// ["आपको", "to you"],
+// ["चाहिए", "should"],
+// ["चावल", "rice"],
+// ["गाजर", "carrot"],
+// ["गरम", "hot"],
+// ["हमें", "us"],
+// ["खाना", "eat"],
+// ["को", "to"],
+// ["मछली", "fish"],
+// ["मुझे", "me"],
+// ["नाश्ता", "breakfast"],
+// ["नींबू", "lemon"],
+// ["फल", "fruit"],
+// ["पसंद", "like"],
+// ["सब्ज़ी", "vegetable"],
+// ["सब्ज़ियाँ", "vegetables"],
+// ["शराब", "liquor"],
+// ["सलाद", "salad"],
+// ["टमाटर", "tomato"],
+// ["तुझे", "you"],
+// ["तुम्हें", "you"],
+// ["उन्हें", "them"],
+// ["उसे", "him"],
+
+// // Food-2
+// ["बोतल", "bottle"],
+// ["चाकू", "knife"],
+// ["चीनी", "sugar"],
+// ["गिलास", "tumbler"],
+// ["माँसाहारी", "non vegetarian"],
+// ["नमक", "salt"],
+// ["नमकीन", "salty"],
+// ["शाकाहारी", "vegetarian"],
+// ["तेल", "oil"],
+
+// // Future
+// ["आयेंगे", "will come"],
+// ["आयेंगी", "will come"],
+// ["आयेगा", "will come"],
+// ["आयेगी", "will come"],
+// ["बाद", "afterwards"],
+// ["जायेंगे", "will"],
+// ["जायेंगी", "will go"],
+// ["जायेगा", "will go"],
+// ["जायेगी", "will go"],
+
+// // Health
+// ["अँगूठा", "thumb"],
+// ["अँगूठे", "thumbs"],
+// ["बाल", "hair"],
+// ["बीमार", "sick"],
+// ["बुखार", "fever"],
+// ["दाँत", "teeth"],
+// ["दाँतों", "teeth"],
+// ["दिल", "heart"],
+// ["दर्द", "pain"],
+// ["दर्द हो रहा", "having pain"],
+// ["दवाई", "medicine"],
+// ["हाथ", "hand"],
+// ["हाथों", "hands"],
+// ["कान", "ear"],
+// ["मुँह", "mouth"],
+// ["नाक", "nose"],
+// ["पैर", "feet"],
+// ["पैरों", "legs"],
+// ["रंग", "color"],
+// ["सिर", "head"],
+// ["स्वस्थ", "healthy"],
+// ["उँगली", "finger"],
+// ["उँगलियाँ", "fingers"],
+
+// // Home
+// ["बंद", "off"],
+// ["बिस्तर", "bed"],
+// ["छत", "ceiling"],
+// ["दीवार", "wall"],
+// ["दीवारें", "the walls"],
+// ["दरवाज़ा", "gate"],
+// ["दरवाज़े", "the doors"],
+// ["गाड़ी", "vehicle"],
+// ["गाड़ियाँ", "cars"],
+// ["इस", "this"],
+// ["ज़मीन", "floor"],
+// ["खिड़की", "window"],
+// ["खिड़कियाँ", "windows"],
+// ["कमरा", "room"],
+// ["कमरे", "rooms"],
+// ["मकान", "house"],
+// ["उस", "that"],
+
+// // Imperatives
+// ["आओ", "come"],
+// ["बैठो", "have a sit"],
+// ["बोलो", "say"],
+// ["बताओ", "tell"],
+// ["देखो", "see"],
+// ["जाओ", "go"],
+// ["खाओ", "eat"],
+// ["खेलो", "play"],
+// ["करो", "do"],
+// ["लो", "take"],
+// ["मत", "don't"],
+// ["मुझसे", "with me"],
+// ["पढ़ो", "read"],
+// ["पियो", "drink"],
+// ["उससे", "from him"],
+
+// // Introduction
+// ["अमेरिका", "America"],
+// ["बेटा", "son"],
+// ["बेटी", "daughter"],
+// ["भाई", "brother"],
+// ["भारत", "India"],
+// ["बहन", "sister"],
+// ["दिन", "day"],
+// ["घर", "house"],
+// ["हर", "every"],
+// ["जाता", "go"],
+// ["जाती", "caste"],
+// ["का", "of"],
+// ["की", "of"],
+// ["में", "in"],
+// ["मेरा", "my"],
+// ["मेरी", "my"],
+// ["नाम", "name"],
+// ["रहता", "lives"],
+// ["रहती", "lives"],
+// ["से", "from"],
+// ["स्कूल", "school"],
+// ["तेरा", "your"],
+// ["तेरी", "your"],
+// ["उसका", "her"],
+// ["उसकी", "his"],
+
+// // Letters-1
+// ["एक", "one"],
+
+// // Modals
+// ["आ", "come"],
+// ["आना", "come"],
+// ["बोल", "lyrics"],
+// ["चाहता", "wanted"],
+// ["चाहते", "want"],
+// ["चाहती", "wanted"],
+// ["गा", "sing"],
+// ["जा", "go"],
+// ["जाना", "go"],
+// ["खाने", "to eat"],
+// ["खेलना", "play"],
+// ["खेलने", "to play"],
+// ["करना", "doing"],
+// ["मिलना", "to meet"],
+// ["मिलने", "to meet"],
+// ["पढ़", "study"],
+// ["पढ़ना", "reading"],
+// ["पढ़ने", "reading"],
+// ["पीना", "drink"],
+// ["सकता", "can"],
+// ["सकते", "can"],
+// ["सकती", "can"],
+// ["सो", "s / o"],
+// ["सोना", "sleep"],
+// ["सोने", "gold"],
+// ["तैर", "swim"],
+// ["उड़", "fly"],
+
+// // Nature
+// ["आग", "fire"],
+// ["आसमान", "sky"],
+// ["बादल", "cloud"],
+// ["चाँद", "moon"],
+// ["हवा", "air"],
+// ["ख़ुशबू", "fragrance"],
+// ["पौधा", "plant"],
+// ["पौधे", "plants"],
+// ["पेड़", "tree"],
+// ["फूल", "flower"],
+// ["पत्ते", "leaves"],
+// ["सूरज", "sun"],
+// ["तालाब", "pond"],
+// ["तारा", "star"],
+// ["तारे", "the stars"],
+
+// // Numbers
+// ["आठ", "eight"],
+// ["चार", "four"],
+// ["छह", "six"],
+// ["दस", "ten"],
+// ["हज़ार", "thousand"],
+// ["कई", "many"],
+// ["कितना", "how much?"],
+// ["कितने", "how many"],
+// ["कितनी", "how many"],
+// ["कुछ", "some"],
+// ["नौ", "nine"],
+// ["पाँच", "five"],
+// ["सात", "seven"],
+// ["सौ", "hundred"],
+
+// // Past
+// ["कल", "tomorrow"],
+// ["पहले", "before"],
+// ["परसों", "day before"],
+// ["था", "was"],
+// ["थे", "were"],
+// ["थी", "was"],
+// ["थीं", "were"],
+
+// // Past-2
+// ["आया", "came"],
+// ["आये", "came"],
+// ["आयी", "came"],
+// ["देखा", "saw"],
+// ["देखे", "see"],
+// ["देखी", "seen"],
+// ["गया", "gone"],
+// ["गये", "gone"],
+// ["गयी", "gone"],
+// ["हमने", "we"],
+// ["खाया", "ate"],
+// ["खाये", "eat"],
+// ["खेला", "played"],
+// ["खेले", "played"],
+// ["लिखा", "wrote"],
+// ["लिखी", "wrote"],
+// ["मैंने", "i"],
+// ["पढ़ा", "read"],
+// ["पढ़ी", "studied"],
+// ["पी", "p"],
+// ["पिया", "drank"],
+// ["तूने", "you"],
+// ["उन्होंने", "they"],
+// ["उसने", "he"],
+
+// // Places
+// ["अंदर", "within"],
+// ["आगे", "ahead"],
+// ["बाहर", "out"],
+// ["दिल्ली", "Delhi"],
+// ["दूर", "far"],
+// ["गाँव", "village"],
+// ["गली", "street"],
+// ["जगह", "location"],
+// ["कौनसा", "which one"],
+// ["कौनसी", "which one"],
+// ["कहाँ", "where?"],
+// ["पीछे", "back"],
+// ["शहर", "city"],
+// ["ऊपर", "above"],
+// ["वहाँ", "there"],
+// ["यहाँ", "here"],
+
+// // Plurals
+// ["औरतें", "women"],
+// ["दो", "two"],
+// ["हैं", "huh"],
+// ["हम", "we"],
+// ["हो", "are"],
+// ["केले", "bananas"],
+// ["खाते", "accounts"],
+// ["किताबें", "books"],
+// ["लड़के", "boys"],
+// ["लड़कियाँ", "girls"],
+// ["पढ़ते", "studying"],
+// ["पीते", "drink"],
+// ["तीन", "three"],
+// ["तुम", "you"],
+// ["वे", "they"],
+// ["ये", "this"],
+
+// // Questions
+// ["क्या", "what"],
+// ["क्यों", "why?"],
+// ["या", "either"],
+
+// // Time
+// ["अब", "now"],
+// ["डेढ़", "one and a half"],
+// ["ढाई", "two and a half"],
+// ["दोपहर", "afternoon"],
+// ["घंटा", "hour"],
+// ["घंटे", "hours"],
+// ["हमेशा", "always"],
+// ["कब", "when"],
+// ["कभी", "sometimes"],
+// ["कभी", "sometimes"],
+// ["मिनट", "minutes"],
+// ["पौने", "a quarter"],
+// ["रात", "night"],
+// ["साढ़े", "and a half"],
+// ["शाम", "evening"],
+// ["समय", "time"],
+// ["सुबह", "morning"],
+// ["सवा", "quarter past"],
+
+// // Weather
+// ["छाता", "umbrella"],
+// ["गर्मी", "heat"],
+// ["जुराब", "socks"],
+// ["क़मीज़", "shirt"],
+// ["कपड़े", "clothes"],
+// ["लग रही", "looking"],
+// ["लगती", "looks like"],
+// ["मौसम", "weather"],
+// ["पहनो", "wear"],
+// ["पतलून", "trousers"],
+// ["सर्दी", "winter"],
+// ["ठंड", "cold"],
+
+// // Work
+// ["आसान", "easy"],
+// ["अख़बार", "newspaper"],
+// ["चिट्ठी", "letter"],
+// ["दुकान", "shop"],
+// ["ग़लत", "wrong"],
+// ["जवाब", "answer"],
+// ["कहानी", "story"],
+// ["कविता", "poem"],
+// ["लेखक", "author"],
+// ["मेहनत", "hard work"],
+// ["मुश्किल", "difficult"],
+// ["सही", "correct"],
+// ["शिक्षक", "teacher"],
+// ["सवाल", "question"],
+
+];
+
+var correct = [0, 1, 2, 3, 4];
+
+var active_hi = -1;
+var active_en = -1;
+
+function pick_five() {
+  var indexes = [];
+  while (indexes.length < 5) {
+    var index = Math.floor(((Math.random())) * word_list.length);
+    if (!indexes.includes(index)) {
+      indexes.push(index);
+    }
+  }
+  var permutation = [];
+  while (permutation.length < 5) {
+    var index = Math.floor(Math.random() * 5);
+    if (!permutation.includes(index)) {
+      permutation.push(index);
+    }
+  }
+  correct[0] = permutation[0];
+  correct[1] = permutation[1];
+  correct[2] = permutation[2];
+  correct[3] = permutation[3];
+  correct[4] = permutation[4];
+
+  for (var i = 0; i < 5; i++) {
+    document.getElementById("hi-" + i.toString() + "-text").innerHTML = word_list[indexes[i]][0];
+    document.getElementById("en-" + permutation[i].toString() + "-text").innerHTML = word_list[indexes[i]][1];
+  }
+}
+
+function maybe_pick_five() {
+  if (!is_clickable("hi", 0) &&
+    !is_clickable("hi", 1) &&
+    !is_clickable("hi", 2) &&
+    !is_clickable("hi", 3) &&
+    !is_clickable("hi", 4)) {
+    pick_five();
+    active_hi = -1;
+    active_en = -1;
+    change_color("hi", 0, "#f0f0f0");
+    change_color("hi", 1, "#f0f0f0");
+    change_color("hi", 2, "#f0f0f0");
+    change_color("hi", 3, "#f0f0f0");
+    change_color("hi", 4, "#f0f0f0");
+    change_color("en", 0, "#f0f0f0");
+    change_color("en", 1, "#f0f0f0");
+    change_color("en", 2, "#f0f0f0");
+    change_color("en", 3, "#f0f0f0");
+    change_color("en", 4, "#f0f0f0");
+  }
+}
+
+pick_five();
+
+function is_clickable(lang, num) {
+  var button = document.getElementById(lang + "-" + num.toString());
+  return button.style.backgroundColor != "lightblue";
+}
+
+function change_color(lang, num, color) {
+  var button = document.getElementById(lang + "-" + num.toString());
+  button.style.backgroundColor = color;
+}
+
+function say(num) {
+    var speak = new SpeechSynthesisUtterance();
+    speak.text = document.getElementById("hi-" + num.toString() + "-text").textContent;
+    speak.lang = "hi-IN";
+    window.speechSynthesis.speak(speak);
+}
+
+function activate(lang, num) {
+  if (lang == "hi" && num != active_hi) {
+    say(num);
+  }
+  if (!is_clickable(lang, num)) {
+    return;
+  }
+  if (active_hi == -1 && active_en == -1) {
+    if (lang == "hi") {
+      active_hi = num;
+    } else {
+      active_en = num;
+    }
+    change_color(lang, num, "yellow");
+  } else if (active_hi != -1 && lang == "hi") {
+    change_color("hi", active_hi, "#f0f0f0");
+    if (active_hi != num) {
+      active_hi = num;
+      change_color("hi", active_hi, "yellow");
+    } else {
+      active_hi = -1;
+    }
+  } else if (active_en != -1 && lang == "en") {
+    change_color("en", active_en, "#f0f0f0");
+    if (active_en != num) {
+      active_en = num;
+      change_color("en", active_en, "yellow");
+    } else {
+      active_en = -1;
+    }
+  } else {
+    if (lang == "en") {
+      if (correct[active_hi] == num) {
+        change_color("hi", active_hi, "lightblue");
+        change_color("en", num, "lightblue");
+        active_hi = -1;
+        active_en = -1;
+        maybe_pick_five();
+      } else {
+        change_color("hi", active_hi, "pink");
+        change_color("en", num, "pink");
+        var this_hi = active_hi;
+        var this_en = num;
+        active_hi = -1;
+        active_en = -1;
+        setTimeout(function() {
+          change_color("hi", this_hi, "#f0f0f0");
+          change_color("en", this_en, "#f0f0f0");
+        }, 200);
+      }
+    } else {
+      if (correct[num] == active_en) {
+        change_color("hi", num, "lightblue");
+        change_color("en", active_en, "lightblue");
+        active_hi = -1;
+        active_en = -1;
+        maybe_pick_five();
+      } else {
+        change_color("hi", num, "pink");
+        change_color("en", active_en, "pink");
+        var this_hi = num;
+        var this_en = active_en;
+        active_hi = -1;
+        active_en = -1;
+        setTimeout(function() {
+          change_color("hi", this_hi, "#f0f0f0");
+          change_color("en", this_en, "#f0f0f0");
+        }, 200);
+      }
+    }
+  }
+}
+
+document.getElementById("hi-0").addEventListener("click", function() {
+  activate("hi", 0);
+});
+document.getElementById("hi-1").addEventListener("click", function() {
+  activate("hi", 1);
+});
+document.getElementById("hi-2").addEventListener("click", function() {
+  activate("hi", 2);
+});
+document.getElementById("hi-3").addEventListener("click", function() {
+  activate("hi", 3);
+});
+document.getElementById("hi-4").addEventListener("click", function() {
+  activate("hi", 4);
+});
+
+document.getElementById("en-0").addEventListener("click", function() {
+  activate("en", 0);
+});
+document.getElementById("en-1").addEventListener("click", function() {
+  activate("en", 1);
+});
+document.getElementById("en-2").addEventListener("click", function() {
+  activate("en", 2);
+});
+document.getElementById("en-3").addEventListener("click", function() {
+  activate("en", 3);
+});
+document.getElementById("en-4").addEventListener("click", function() {
+  activate("en", 4);
+});
+        </script>
+    </body>
+</html>
