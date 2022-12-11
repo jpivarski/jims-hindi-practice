@@ -633,19 +633,21 @@ function maybe_pick_five() {
     !is_clickable("hi", 2) &&
     !is_clickable("hi", 3) &&
     !is_clickable("hi", 4)) {
-    pick_five();
-    active_hi = -1;
-    active_en = -1;
-    change_color("hi", 0, "#f0f0f0");
-    change_color("hi", 1, "#f0f0f0");
-    change_color("hi", 2, "#f0f0f0");
-    change_color("hi", 3, "#f0f0f0");
-    change_color("hi", 4, "#f0f0f0");
-    change_color("en", 0, "#f0f0f0");
-    change_color("en", 1, "#f0f0f0");
-    change_color("en", 2, "#f0f0f0");
-    change_color("en", 3, "#f0f0f0");
-    change_color("en", 4, "#f0f0f0");
+    setTimeout(function() {
+      pick_five();
+      active_hi = -1;
+      active_en = -1;
+      change_color("hi", 0, "#f0f0f0");
+      change_color("hi", 1, "#f0f0f0");
+      change_color("hi", 2, "#f0f0f0");
+      change_color("hi", 3, "#f0f0f0");
+      change_color("hi", 4, "#f0f0f0");
+      change_color("en", 0, "#f0f0f0");
+      change_color("en", 1, "#f0f0f0");
+      change_color("en", 2, "#f0f0f0");
+      change_color("en", 3, "#f0f0f0");
+      change_color("en", 4, "#f0f0f0");
+    }, 1000);
   }
 }
 
