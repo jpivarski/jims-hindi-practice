@@ -65,7 +65,7 @@
           पाँच
         </div>
       </div>
-      <div style="margin-top: 20px; font-size: 24px;">
+      <div style="margin-top: 40px; font-size: 36px;">
         <form action="javascript:void(0);">
           <input type="checkbox" name="options" value="show-hindi" id="show-hindi"> show Hindi<br>
         </form>
@@ -825,6 +825,22 @@ document.getElementById("en-5").addEventListener("mousedown", function() {
 });
 document.getElementById("en-6").addEventListener("mousedown", function() {
   activate("en", 6);
+});
+document.getElementById("show-hindi").addEventListener("click", function() {
+  if (document.getElementById("show-hindi").checked) {
+    document.getElementById("hi-0-text").style.display = "block";
+    document.getElementById("hi-1-text").style.display = "block";
+    document.getElementById("hi-2-text").style.display = "block";
+    document.getElementById("hi-3-text").style.display = "block";
+    document.getElementById("hi-4-text").style.display = "block";
+  }
+  else {
+    document.getElementById("hi-0-text").style.display = "none";
+    document.getElementById("hi-1-text").style.display = "none";
+    document.getElementById("hi-2-text").style.display = "none";
+    document.getElementById("hi-3-text").style.display = "none";
+    document.getElementById("hi-4-text").style.display = "none";
+  }
 });
         </script>
     </body>
