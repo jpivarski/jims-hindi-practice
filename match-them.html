@@ -65,6 +65,11 @@
           पाँच
         </div>
       </div>
+      <div style="margin-top: 20px; font-size: 24px;">
+        <form action="javascript:void(0);">
+          <input type="checkbox" name="options" value="show-hindi" id="show-hindi"> show Hindi<br>
+        </form>
+      </div>
     </div>
   </div>
   <div class="split" style="right: 0; margin-right: 10px;">
@@ -646,6 +651,14 @@ function pick_five() {
   correct[3] = permutation[3];
   correct[4] = permutation[4];
 
+  if (!document.getElementById("show-hindi").checked) {
+    document.getElementById("hi-0-text").style.display = "none";
+    document.getElementById("hi-1-text").style.display = "none";
+    document.getElementById("hi-2-text").style.display = "none";
+    document.getElementById("hi-3-text").style.display = "none";
+    document.getElementById("hi-4-text").style.display = "none";
+  }
+  
   for (var i = 0; i < 5; i++) {
     document.getElementById("hi-" + i.toString() + "-text").innerHTML = word_list[indexes[i]][0];
     document.getElementById("en-" + permutation[i].toString() + "-text").innerHTML = word_list[indexes[i]][1];
@@ -675,7 +688,9 @@ function maybe_pick_five() {
       change_color("en", 2, "#f0f0f0");
       change_color("en", 3, "#f0f0f0");
       change_color("en", 4, "#f0f0f0");
-    }, 500);
+      change_color("en", 5, "#f0f0f0");
+      change_color("en", 6, "#f0f0f0");
+    }, 250);
   }
 }
 
@@ -699,6 +714,9 @@ function say(num) {
 }
 
 function activate(lang, num) {
+  if (lang == "hi") {
+    document.getElementById("hi-" + num.toString() + "-text").style.display = "block";
+  }
   if (lang == "hi" && num != active_hi) {
     say(num);
   }
