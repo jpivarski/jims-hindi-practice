@@ -931,7 +931,7 @@ function reset() {
     index += 1;
   }
 
-  document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]);
+  document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]) + "#Hindi";
   document.getElementById("word").textContent = item[0];
   document.getElementById("translation").textContent = item[1];
   document.getElementById("response").value = "";
