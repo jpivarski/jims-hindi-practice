@@ -1,0 +1,451 @@
+classroom
+room
+pen
+paper
+notepad
+book
+chair
+trash can
+class
+window
+clock
+thing
+ceiling
+picture
+door
+wall
+map
+pencil
+floor
+table
+dictionary
+school
+this
+that
+where
+who
+what
+here
+there
+very
+good
+bravo
+okay
+thanks
+to read
+to write
+to speak
+opened
+closed
+say it again
+speak up
+I don't know
+I don't remember
+I don't understand
+English
+example
+false
+answer
+utterance
+meaning
+sentence
+word
+question
+true
+student
+teacher
+friend
+both
+doctor
+America
+American
+India
+Indian
+man
+woman
+child
+boy
+girl
+unhappy
+happy
+melancholy
+married
+really
+and
+why
+absolutely
+also
+or
+but
+people
+all
+any
+computer
+closet
+carpet
+food
+car
+TV
+fan
+water
+phone
+bottle
+several
+something
+someone
+everything
+everyone
+anything
+anyone
+many
+some
+outside
+inside
+only
+bad
+spoiled
+new
+old
+beautiful
+ugly
+excellent
+oval
+rectagular
+high
+low
+round
+square
+wide
+small
+large
+tall
+short
+triangular
+thin
+fat
+big
+heavy
+lightweight
+weight
+appearance
+black
+pink
+orange
+blue
+yellow
+purple
+brown
+color
+red
+white
+gray
+green
+quite
+empty
+too much
+a little
+a lot
+how many
+how
+which
+stuff
+whose
+to come
+to go
+to listen
+to see
+to do
+to be
+to ask
+to tell
+to take
+to give
+to eat
+to drink
+to remove
+to rest
+to get up
+to open
+to close
+to accompany
+to reply
+to sit
+to ruin
+to stop
+to understand
+inside
+ahead
+up
+work
+dirty
+quickly
+forcefully
+slowly
+down
+behind
+outside
+clean
+museum
+hospital
+building
+medicine shop
+church
+zoo
+market
+post office
+store
+neighborhood
+park
+library
+garden
+market
+restaurant
+temple
+mosque
+road
+neighborhood
+mall
+highway
+train station
+city
+street
+cinema
+hotel
+that
+near
+on
+in
+from
+north
+northern
+south
+southern
+west
+western
+east
+eastern
+region
+town
+place
+country
+river
+state
+capital
+city
+above
+next to
+like
+below
+beyond
+on top of
+between
+to the right of
+to the left of
+under
+in front of
+courtyard
+clothes
+flower pot
+home
+bedsheet
+box
+bed
+bottle
+blanket
+sofa
+certainly
+immediately
+direction
+manner
+other
+water
+bottle
+according to
+in addition to
+because of
+in the direction of
+like
+far from
+before
+instead of
+after
+about
+in spite of
+for
+including
+accompanying
+bowl
+fork
+scissors
+drinking glass
+spoon
+knife
+key
+stove
+container
+pillow
+plate
+towel
+rug
+curtain
+plant
+plate
+pot
+cloth
+husband
+wife
+family
+sister
+brother
+siblings
+father
+mother
+parents
+now
+entire
+classmate
+eye
+ear
+cheek
+face
+chin
+mole
+belly
+tooth
+beard
+nose
+stomach
+foot
+body
+arm
+hair
+mouth
+moustache
+appearance
+head
+hand
+lip
+bald
+dark-colored
+light-colored
+round
+thick
+curly
+healthy
+medium
+delicate
+full
+strong
+approximately
+height
+straight
+blond
+intelligent
+strange
+commonplace
+lazy
+honest
+special
+serious
+irresponsible
+cunning
+responsible
+divorced
+tired
+religious
+studious
+cute
+ill-mannered
+naughty
+talkative
+foolish
+friendly
+hard-working
+careless
+shy
+strict
+neat
+ingenuous
+sluggish
+temperment
+fun-loving
+clever
+human being
+person
+air conditioner
+hallway
+toilet
+veranda
+bathroom
+bedroom
+living room
+kitchen
+lawn
+this much
+that much
+oneself
+dog
+glasses
+pet
+phone
+cat
+bicycle
+rich
+poor
+world
+mountain
+money
+quality
+better
+economics
+employee
+mathematics
+physics
+residence
+servant
+job
+to study
+to teach
+profession
+to live
+to undress
+to exercise
+to move
+to stroll
+to run
+to bathe
+to cook
+to dress
+to arrive
+to change clothes
+to make
+to sleep
+often
+usually
+once in a while
+sometimes
+early
+until
+late
+then
+day
+a while
+afternoon
+first
+again
+time
+night
+daily
+evening
+morning
+always
+every
+especially
+game
+tea
+most
+by foot
+mile
+to return
+
+gets to page 213
