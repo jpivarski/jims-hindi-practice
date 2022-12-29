@@ -1433,7 +1433,7 @@ document.getElementById("word").addEventListener("click", say);
 response.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
-    document.getElementById("word").style.textColor = "#000000";
+    document.getElementById("word").style.color = "#000000";
     if (document.getElementById("response").value == document.getElementById("word").textContent) {
       reset();
     }
