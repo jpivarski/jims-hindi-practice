@@ -53,7 +53,10 @@ input[type=checkbox] {
         <div style="margin-top: 80px; font-size: 36px;">
           Wiktionary <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary">lookup</a>
         </div>
-    </div>
+        <div style="margin-top: 80px; font-size: 36px;">
+          Google <a href="https://translate.google.com/?sl=hi&tl=en&op=translate&text=" target="_blank" id="google">translate</a>
+        </div>
+      </div>
     <script>
 
 var letter_list = [
@@ -932,6 +935,8 @@ function reset() {
   }
 
   document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]) + "#Hindi";
+  document.getElementById("google").href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(item[0]);
+
   document.getElementById("word").textContent = item[0];
   document.getElementById("translation").textContent = item[1];
   document.getElementById("response").value = "";
