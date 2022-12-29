@@ -114,14 +114,6 @@
 </div>
     <script>
 
-var word_list = [];
-
-fetch("./data/word-list.json").then(function(response) {
-  word_list = response.json();
-}).catch(function(error) {
-  console.log(error);
-});
-
 var correct = [0, 1, 2, 3, 4];
 
 var active_hi = -1;
@@ -170,6 +162,18 @@ function pick_five() {
   }
 }
 
+var word_list = [];
+
+fetch("./data/word-list.json").then(function(response) {
+  return response.json();
+}).then(function(data) {
+  word_list = data;
+}).then(function() {
+  pick_five();
+}).catch(function(error) {
+  console.log(error);
+});
+
 function maybe_pick_five() {
   if (!is_clickable("hi", 0) &&
     !is_clickable("hi", 1) &&
@@ -195,8 +199,6 @@ function maybe_pick_five() {
     }, 250);
   }
 }
-
-pick_five();
 
 function is_clickable(lang, num) {
   var button = document.getElementById(lang + "-" + num.toString());
