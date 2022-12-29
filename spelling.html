@@ -45,6 +45,11 @@ input[type=checkbox] {
                 <input type="text" id="response" class="whole" value="किताब">
             </form>
         </div>
+        <div style="margin-top: 40px; font-size: 36px;">
+          <form action="javascript:void(0);">
+            <input type="checkbox" name="options" value="random" id="random" checked> random<br>
+          </form>
+      </div>
     </div>
     <script>
 
@@ -139,7 +144,7 @@ var letter_list = [
     ["चौ", "च औ"],
     ["चं", "च अं"],
     ["चः", "च अः"],
-    
+
     ["छ", "छ"],
     ["छा", "छ आ"],
     ["छि", "छ इ"],
@@ -892,6 +897,8 @@ function say() {
   window.speechSynthesis.speak(speak);
 }
 
+var index = 0;
+
 function reset() {
   var choices = document.getElementsByName("which");
   var which_list = word_list;
@@ -906,9 +913,19 @@ function reset() {
       which_list = conjunct_list;
     }
   }
+
   var item = null;
-  while (item === null) {
-    item = which_list[Math.floor(((Math.random())) * which_list.length)];
+  if (!document.getElementById("random").checked) {
+    while (item === null) {
+      item = which_list[Math.floor(((Math.random())) * which_list.length)];
+    }
+  }
+  else {
+    if (index >= which_list.length) {
+      index = 0;
+    }
+    item = index;
+    index += 1;
   }
 
   document.getElementById("word").textContent = item[0];
