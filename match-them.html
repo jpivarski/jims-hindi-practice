@@ -65,10 +65,13 @@
           पाँच
         </div>
       </div>
-      <div style="margin-top: 40px; font-size: 36px;">
+      <div style="margin-top: 80px; font-size: 36px;">
         <form action="javascript:void(0);">
           <input type="checkbox" name="options" value="show-hindi" id="show-hindi"> show Hindi<br>
         </form>
+      </div>
+      <div style="margin-top: 80px; font-size: 36px;">
+          Wiktionary: <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-0" style="margin-left: 10px">0</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-1" style="margin-left: 10px">1</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-2" style="margin-left: 10px">2</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-3" style="margin-left: 10px">3</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-4" style="margin-left: 10px">4</a>
       </div>
     </div>
   </div>
@@ -156,6 +159,7 @@ function pick_five() {
   for (var i = 0; i < 5; i++) {
     document.getElementById("hi-" + i.toString() + "-text").innerHTML = word_list[indexes[i]][0];
     document.getElementById("en-" + permutation[i].toString() + "-text").innerHTML = word_list[indexes[i]][1];
+    document.getElementById("wiktionary-" + i.toString()).href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(word_list[indexes[i]][0]);
   }
   for (var i = 5; i < 7; i++) {
     document.getElementById("en-" + permutation[i].toString() + "-text").innerHTML = word_list[indexes[i]][1];
