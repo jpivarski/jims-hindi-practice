@@ -915,7 +915,7 @@ function reset() {
   }
 
   var item = null;
-  if (!document.getElementById("random").checked) {
+  if (document.getElementById("random").checked) {
     while (item === null) {
       item = which_list[Math.floor(((Math.random())) * which_list.length)];
     }
