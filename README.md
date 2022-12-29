@@ -1,3 +1,3 @@
-<p style="font-size: 24; font-weight: bold"><a href="https://jpivarski.github.io/jims-hindi-practice/spelling.html">Spelling</a></p>
+### [Spelling](https://jpivarski.github.io/jims-hindi-practice/spelling.html)
 
-<p style="font-size: 24; font-weight: bold"><a href="https://jpivarski.github.io/jims-hindi-practice/match-them.html">Match-Them</a></p>
+### [Match-Them](https://jpivarski.github.io/jims-hindi-practice/match-them.html)
