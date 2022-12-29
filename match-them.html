@@ -339,11 +339,21 @@ document.getElementById("show-hindi").addEventListener("click", function() {
     document.getElementById("hi-4-text").style.display = "block";
   }
   else {
-    document.getElementById("hi-0-text").style.display = "none";
-    document.getElementById("hi-1-text").style.display = "none";
-    document.getElementById("hi-2-text").style.display = "none";
-    document.getElementById("hi-3-text").style.display = "none";
-    document.getElementById("hi-4-text").style.display = "none";
+    if (document.getElementById("hi-0").style.backgroundColor != "lightblue") {
+      document.getElementById("hi-0-text").style.display = "none";
+    }
+    if (document.getElementById("hi-1").style.backgroundColor != "lightblue") {
+      document.getElementById("hi-1-text").style.display = "none";
+    }
+    if (document.getElementById("hi-2").style.backgroundColor != "lightblue") {
+      document.getElementById("hi-2-text").style.display = "none";
+    }
+    if (document.getElementById("hi-3").style.backgroundColor != "lightblue") {
+      document.getElementById("hi-3-text").style.display = "none";
+    }
+    if (document.getElementById("hi-4").style.backgroundColor != "lightblue") {
+      document.getElementById("hi-4-text").style.display = "none";
+    }
   }
 });
         </script>
