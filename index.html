@@ -45,23 +45,6 @@ input[type=checkbox] {
                 <input type="text" id="response" class="whole" value="किताब">
             </form>
         </div>
-        <div style="margin-top: 20px; font-size: 24px;">
-            <form action="javascript:void(0);">
-              <fieldset id="types" style="border: none;">
-                <input type="checkbox" name="type" value="noun" id="noun" checked="checked"> noun<br>
-                <input type="checkbox" name="type" value="name" id="name" checked="checked"> name<br>
-                <input type="checkbox" name="type" value="pronoun" id="pronoun" checked="checked"> pronoun<br>
-                <input type="checkbox" name="type" value="adjective" id="adjective" checked="checked"> adjective<br>
-                <input type="checkbox" name="type" value="number" id="number" checked="checked"> number<br>
-                <input type="checkbox" name="type" value="color" id="color" checked="checked"> color<br>
-                <input type="checkbox" name="type" value="verb" id="verb" checked="checked"> verb<br>
-                <input type="checkbox" name="type" value="genitive" id="genitive" checked="checked"> genitive<br>
-                <input type="checkbox" name="type" value="question" id="question" checked="checked"> question<br>
-                <input type="checkbox" name="type" value="postposition" id="postposition" checked="checked"> postposition<br>
-                <input type="checkbox" name="type" value="other" id="other" checked="checked"> other<br>
-                </fieldset>
-            </form>
-        </div>
     </div>
     <script>
 
@@ -1771,41 +1754,50 @@ var conjunct_list = [
 var response = document.getElementById("response");
 
 function say() {
-    var speak = new SpeechSynthesisUtterance();
-    speak.text = document.getElementById("word").textContent;
-    speak.lang = "hi-IN";
-    window.speechSynthesis.speak(speak);
+  var speak = new SpeechSynthesisUtterance();
+  speak.text = document.getElementById("word").textContent;
+  speak.lang = "hi-IN";
+  window.speechSynthesis.speak(speak);
+}
+
+function reset() {
+  var choices = document.getElementsByName("which");
+  var which_list = word_list;
+  for (var choice of choices) {
+    if (choice.checked && choice.value == "letters") {
+      which_list = letter_list;
+    }
+    if (choice.checked && choice.value == "conjuncts") {
+      which_list = conjunct_list;
+    }
+  }
+  var item = null;
+  while (item === null) {
+    item = which_list[Math.floor(Math.sqrt((Math.random())) * which_list.length)];
+  }
+
+  if (choice.checked && choice.value == "words") {
+    document.getElementById("word").style.textColor = "#e0e0e0";
+  }
+  document.getElementById("word").textContent = item[0];
+  document.getElementById("translation").textContent = item[1];
+  document.getElementById("response").value = "";
+  say();
 }
 
 document.getElementById("word").addEventListener("click", say);
 
 response.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        var choices = document.getElementsByName("which");
-        var which_list = word_list;
-        for (var choice of choices) {
-            if (choice.checked && choice.value == "letters") {
-                which_list = letter_list;
-            }
-            if (choice.checked && choice.value == "conjuncts") {
-                which_list = conjunct_list;
-            }
-        }
-        var item = null;
-        while (item === null) {
-            item = which_list[Math.floor(Math.sqrt((Math.random())) * which_list.length)];
-            if (item.length == 3  &&  !document.getElementById(item[2]).checked) {
-                item = null;
-            }
-        }
-
-        document.getElementById("word").textContent = item[0];
-        document.getElementById("translation").textContent = item[1];
-        document.getElementById("response").value = "";
-        say();
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("word").style.textColor = "#000000";
+    if (document.getElementById("response").value == document.getElementById("word").textContent) {
+      reset();
     }
+  }
 });
+
+reset();
         </script>
     </body>
 </html>
