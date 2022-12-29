@@ -49,7 +49,10 @@ input[type=checkbox] {
           <form action="javascript:void(0);">
             <input type="checkbox" name="options" value="random" id="random" checked> random<br>
           </form>
-      </div>
+        </div>
+        <div style="margin-top: 40px; font-size: 36px;">
+          <a href="https://en.wiktionary.org/wiki/" id="wiktionary">Wiktionary</a>
+        </div>
     </div>
     <script>
 
@@ -928,6 +931,7 @@ function reset() {
     index += 1;
   }
 
+  document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]);
   document.getElementById("word").textContent = item[0];
   document.getElementById("translation").textContent = item[1];
   document.getElementById("response").value = "";
