@@ -1407,6 +1407,9 @@ function reset() {
   var choices = document.getElementsByName("which");
   var which_list = word_list;
   for (var choice of choices) {
+    if (choice.checked && choice.value == "words") {
+      document.getElementById("word").style.color = "#fcfcfc";
+    }
     if (choice.checked && choice.value == "letters") {
       which_list = letter_list;
     }
@@ -1419,9 +1422,6 @@ function reset() {
     item = which_list[Math.floor(((Math.random())) * which_list.length)];
   }
 
-  if (choice.checked && choice.value == "words") {
-    document.getElementById("word").style.color = "#fcfcfc";
-  }
   document.getElementById("word").textContent = item[0];
   document.getElementById("translation").textContent = item[1];
   document.getElementById("response").value = "";
