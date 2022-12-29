@@ -162,9 +162,16 @@ function pick_five() {
   }
 }
 
+var word_list_filename = "word-list.json";
+
+var url_params = new URLSearchParams(window.location.search);
+if (url_params.has("d")) {
+  word_list_filename = url_params.get("d");
+}
+
 var word_list = [];
 
-fetch("./data/word-list.json").then(function(response) {
+fetch("./data/" + word_list_filename).then(function(response) {
   return response.json();
 }).then(function(data) {
   word_list = data;
