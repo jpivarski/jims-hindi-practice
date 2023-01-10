@@ -952,9 +952,6 @@ if (url_params.has("d")) {
 if (url_params.has("i")) {
   document.getElementById("random").checked = false;
   index = parseInt(url_params.get("i"));
-  if (!(index < which_list.length)) {
-    index = 0;
-  }
 }
 
 var word_list = [];
@@ -968,6 +965,10 @@ fetch("./data/" + word_list_filename).then(function(response) {
 }).catch(function(error) {
   console.log(error);
 });
+
+if (!(index < which_list.length)) {
+    index = 0;
+  }
 
 document.getElementById("word").addEventListener("click", say);
 
