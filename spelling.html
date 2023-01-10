@@ -921,16 +921,19 @@ function reset() {
   }
 
   var item = null;
+  var index_used = null;
   if (document.getElementById("random").checked) {
     while (item === null) {
-      item = which_list[Math.floor(((Math.random())) * which_list.length)];
+      index_used = Math.floor(((Math.random())) * which_list.length);
+      item = which_list[index_used];
     }
   }
   else {
     if (index >= which_list.length) {
       index = 0;
     }
-    item = which_list[index];
+    index_used = index;
+    item = which_list[index_used];
     index += 1;
   }
 
@@ -938,7 +941,7 @@ function reset() {
   document.getElementById("google").href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(item[0]);
 
   document.getElementById("word").textContent = item[0];
-  document.getElementById("translation").textContent = item[1] + " (" + index.toString() + ")";
+  document.getElementById("translation").textContent = item[1] + " (" + index_used.toString() + ")";
   document.getElementById("response").value = "";
   say();
 }
