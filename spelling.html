@@ -966,9 +966,12 @@ fetch("./data/" + word_list_filename).then(function(response) {
   console.log(error);
 });
 
-if (!(index < which_list.length)) {
+if url_params.has("i") {
+  if (!(index < which_list.length)) {
     index = 0;
   }
+  index -= 1;
+}
 
 document.getElementById("word").addEventListener("click", say);
 
