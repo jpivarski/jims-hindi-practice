@@ -294,6 +294,23 @@
 ["शहर", "city"],
 ["ऊपर", "above"],
 ["वहाँ", "there"],
-["यहाँ", "here"]
+["यहाँ", "here"],
+
+["अब", "now"],
+["डेढ़", "one and a half"],
+["ढाई", "two and a half"],
+["दोपहर", "afternoon"],
+["घंटा", "hour"],
+["हमेशा", "always"],
+["कब", "when"],
+["कभी", "sometimes"],
+["मिनट", "minute"],
+["पौने", "quarter"],
+["रात", "night"],
+["साढ़े", "and a half"],
+["शाम", "evening"],
+["समय", "time"],
+["सुबह", "morning"],
+["सवा", "quarter past"]
 
 ]

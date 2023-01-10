@@ -910,7 +910,7 @@ function reset() {
   var which_list = word_list;
   for (var choice of choices) {
     if (choice.checked && choice.value == "words") {
-      document.getElementById("word").style.color = "#fcfcfc";
+      document.getElementById("word").style.color = "#c0c0c0";
     }
     if (choice.checked && choice.value == "letters") {
       which_list = letter_list;
@@ -937,7 +937,7 @@ function reset() {
   document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]) + "#Hindi";
   document.getElementById("google").href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(item[0]);
 
-  document.getElementById("word").textContent = item[0];
+  document.getElementById("word").textContent = item[0] + " (" + index.toString() + ")";
   document.getElementById("translation").textContent = item[1];
   document.getElementById("response").value = "";
   say();
@@ -948,6 +948,13 @@ var word_list_filename = "word-list.json";
 var url_params = new URLSearchParams(window.location.search);
 if (url_params.has("d")) {
   word_list_filename = url_params.get("d");
+}
+if (url_params.has("i")) {
+  document.getElementById("random").checked = false;
+  index = parseInt(url_params.get("i"));
+  if (!(index < which_list.length)) {
+    index = 0;
+  }
 }
 
 var word_list = [];
