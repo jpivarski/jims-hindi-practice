@@ -966,7 +966,7 @@ fetch("./data/" + word_list_filename).then(function(response) {
   console.log(error);
 });
 
-if url_params.has("i") {
+if (url_params.has("i")) {
   if (!(index < which_list.length)) {
     index = 0;
   }
