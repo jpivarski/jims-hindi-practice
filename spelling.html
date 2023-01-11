@@ -969,14 +969,6 @@ fetch("./data/" + word_list_filename).then(function(response) {
   console.log(error);
 });
 
-if (url_params.has("i")) {
-  if (!(index < word_list.length)) {
-    index = 0;
-  }
-  index -= 1;
-  reset();
-}
-
 document.getElementById("word").addEventListener("click", say);
 
 response.addEventListener("keyup", function (event) {
@@ -988,6 +980,13 @@ response.addEventListener("keyup", function (event) {
     }
   }
 });
+
+if (url_params.has("i")) {
+  if (!(index < word_list.length)) {
+    index = 0;
+  }
+  reset();
+}
         </script>
     </body>
 </html>
