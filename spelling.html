@@ -929,7 +929,7 @@ function reset() {
     }
   }
   else {
-    if (index >= which_list.length) {
+    if (!(0 <= index  &&  index < which_list.length)) {
       index = 0;
     }
     index_used = index;
@@ -982,9 +982,6 @@ response.addEventListener("keyup", function (event) {
 });
 
 if (url_params.has("i")) {
-  if (!(index < word_list.length)) {
-    index = 0;
-  }
   reset();
 }
         </script>
