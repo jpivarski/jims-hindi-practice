@@ -311,6 +311,21 @@
 ["शाम", "evening"],
 ["समय", "time"],
 ["सुबह", "morning"],
-["सवा", "quarter past"]
+["सवा", "quarter past"],
+
+["आसान", "easy"],
+["अख़बार", "newspaper"],
+["चिट्ठी", "letter"],
+["दुकान", "shop"],
+["ग़लत", "wrong"],
+["जवाब", "answer"],
+["कहानी", "story"],
+["कविता", "poem"],
+["लेखक", "author"],
+["मेहनत", "hard work"],
+["मुश्किल", "difficult"],
+["सही", "correct"],
+["शिक्षक", "teacher"],
+["सवाल", "question"]
 
 ]
