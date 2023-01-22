@@ -326,6 +326,19 @@
 ["मुश्किल", "difficult"],
 ["सही", "correct"],
 ["शिक्षक", "teacher"],
-["सवाल", "question"]
+["सवाल", "question"],
+
+["आपसे", "from you (form)"],
+["आराम", "rest"],
+["बेहतर", "better"],
+["भी", "also"],
+["धीरे", "slowly"],
+["ज़्यादा", "more"],
+["कम", "less"],
+["सबसे", "most"],
+["तेज़", "fast"],
+["तुझसे", "from you (semi)"],
+["तुमसे", "from you (int)"],
+["उनसे", "from them"]
 
 ]
