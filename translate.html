@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jim's Hindi practice</title>
+    <style>
+.half {
+  border: 0px;
+  margin: 0px;
+  padding: 31px;
+  font-size: 144px;
+}
+
+.whole {
+  width: 90%;
+  border: 1px solid black;
+  margin: 0px;
+  padding: 30px;
+  font-size: 144px;
+}
+
+input[type=checkbox] {
+  margin-top: 20px;
+}
+    </style>
+  </head>
+  <body>
+    <div style="margin: 30px;">
+        <div style="font-size: 36px;">
+            <span id="transliteration" style="float: right;"></span>
+            <br clear="right">
+            <span id="word" class="half">किताब</span>
+        </div>
+        <div style="margin-top: 30px;">
+            <form action="javascript:void(0);" autocomplete="off">
+                <input autocomplete="false" name="hidden" type="text" style="display: none;">
+                <input type="text" id="response" class="whole" value="किताब">
+            </form>
+        </div>
+        <div style="margin-top: 80px; font-size: 36px;">
+          <form action="javascript:void(0);">
+            <input type="checkbox" name="options" value="random" id="random" checked> random<br>
+          </form>
+        </div>
+        <div style="margin-top: 80px; font-size: 36px;">
+          Wiktionary <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary">lookup</a>
+        </div>
+        <div style="margin-top: 80px; font-size: 36px;">
+          Google <a href="https://translate.google.com/?sl=hi&tl=en&op=translate&text=" target="_blank" id="google">translate</a>
+        </div>
+      </div>
+    <script>
+
+var response = document.getElementById("response");
+
+function say() {
+  var speak = new SpeechSynthesisUtterance();
+  speak.text = document.getElementById("word").textContent;
+  speak.lang = "hi-IN";
+  window.speechSynthesis.speak(speak);
+}
+
+var index = 0;
+var translation = "";
+
+function reset() {
+  var item = null;
+  var index_used = null;
+  if (document.getElementById("random").checked) {
+    while (item === null) {
+      index_used = Math.floor(((Math.random())) * word_list.length);
+      item = word_list[index_used];
+    }
+  }
+  else {
+    if (!(0 <= index  &&  index < word_list.length)) {
+      index = 0;
+    }
+    index_used = index;
+    item = word_list[index_used];
+    index += 1;
+  }
+
+  document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]) + "#Hindi";
+  document.getElementById("google").href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(item[0]);
+
+  document.getElementById("word").textContent = item[0];
+  if (item.length > 2) {
+    document.getElementById("transliteration").textContent = item[2];
+  }
+  document.getElementById("response").value = "";
+  translation = item[1];
+  say();
+}
+
+var word_list_filename = "word-list-2.json";
+
+var url_params = new URLSearchParams(window.location.search);
+if (url_params.has("d")) {
+  word_list_filename = url_params.get("d");
+}
+if (url_params.has("i")) {
+  document.getElementById("random").checked = false;
+  index = parseInt(url_params.get("i"));
+}
+
+var word_list = [];
+
+fetch("./data/" + word_list_filename).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  word_list = data;
+}).then(function() {
+  reset();
+}).catch(function(error) {
+  console.log(error);
+});
+
+document.getElementById("word").addEventListener("click", say);
+
+response.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (document.getElementById("response").value == translation) {
+      reset();
+    }
+    else {
+      document.getElementById("response").value = translation;
+    }
+  }
+});
+
+        </script>
+    </body>
+</html>
