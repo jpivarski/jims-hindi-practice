@@ -447,5 +447,892 @@ most
 by foot
 mile
 to return
+when
+at what time
+one and a half
+two and a half
+quarter to
+resound
+o'clock
+approximately
+quarter past
+half past
+to say
+to leave
+to know
+to fear
+to be afraid of
+to serve
+to call
+to ask
+to telephone
+to talk
+to talk to
+to invite
+to believe
+to meet
+to bring
+to take
+to take with
+apart from
+instead of
+after
+to end
+to open
+right after
+right before
+again
+to wash
+conversation
+to put
+to begin
+before
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+one's own
+on one's own
+each other
+like this
+that
+self
+to play
+alley
+pocket
+office
+tooth
+sick
+month
+expert
+like that
+true
+false
+weekend
+to clean
+year
+week
+today
+these days
+nearby
+examination
+standing
+to buy
+to sing
+song
+to climb
+to walk
+to stroll
+to want
+cart
+to dance
+fruit
+flower
+to ring
+ruined
+to ruin
+seated
+help
+famous
+guest
+busy
+maybe
+noise
+to make noise
+journey
+stair
+wait
+to wait
+use
+to use
+less
+to lower
+to exercise
+to try
+end
+to finish
+worry
+to worry
+mention
+to mention
+hatred
+to hate
+study
+to study
+address
+to find out
+worried
+to bother
+completed
+to complete
+love
+to love
+closed
+to close
+topic
+to talk to
+trust
+to trust
+help
+to help
+forgiven
+to forgive
+confidence
+to believe
+beginning
+to start
+cleaning
+to clean
+late
+fog
+bad
+hot
+warm weather
+climate
+cold weather
+cold
+storm
+sharp
+sunshine
+rainy season
+snow
+cloud
+to rain
+weather
+clear
+pleasant
+sun
+wind
+summer
+winter
+fall
+spring
+season
+month
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+during
+end
+available
+to count
+hour
+day off
+so
+neither
+to fall
+minute
+century
+beginning
+grape
+egg
+ginger
+flour
+mango
+potato
+banana
+carrot
+cauliflower
+meat
+rice
+tomato
+oil
+yougurt
+lentils
+milk
+cilantro
+salt
+paneer
+spinach
+onion
+fruit
+goat
+barfi
+eggplant
+peas
+spice
+spicy
+mithai
+pepper
+gram masala
+Mughlai
+chicken
+laddu
+garlic
+red pepper
+bell pepper
+orange
+vegetable
+spinach
+plain
+apple
+if
+then
+various
+butcher
+store
+some
+isn't it so?
+address
+fruit seller
+movie
+only
+language
+favorite
+action film
+to socialize
+classical
+hobby
+music
+vegetable seller
+soap
+sweet maker
+to come
+to know
+is needed
+to need
+liking
+to like
+known
+to meet
+to get
+a memory
+to remember
+to seem
+understanding
+to make sense
+important
+easy
+boring
+unnecessary
+necessary
+interesting
+amusing
+difficult
+habit
+to shop
+to spend
+to travel
+to drive
+to swim
+interest
+to dance
+regularly
+to drink
+leisure time
+to save
+to pass time
+fun
+recreation
+musical instrument
+to sew
+actually
+completely
+to earn
+to buy
+unoccupied
+to want
+life
+state of health
+a fair amount
+to become
+to sell
+complete
+opinion
+idea
+wedding
+to marry
+to enjoy
+really
+in agreement
+health
+healthy
+sleeve
+embroidery
+cloth
+shirt
+tunic
+collar
+dark
+thick
+sandal
+glasses
+shoe
+pocket
+hat
+loose
+tight
+stain
+scarf
+stripe
+pants
+drawstring pants
+fine
+sock
+thick
+salvar
+shawl
+servani
+sari
+lightweight
+separate
+jewelry
+to show
+liking
+without
+but
+expensive
+rickshaw
+rickshaw driver
+that
+inexpensive
+flame
+half
+cardamom
+to pour
+to boil
+cloth kilogram
+bundle
+customer
+sugar
+strainer
+to strain
+shoe
+to join
+collection
+pair
+to put in
+ready
+dozen
+shopkeeper
+slow
+leaf
+one quarter part
+meter
+silk
+method
+bottle
+ingredients
+taste
+alone
+experience
+unique
+genuine
+price
+actually
+price
+dependent on
+to refrain
+to like
+difference
+to ask for
+free
+bargaining
+custom
+rupee
+price per unit
+one number of
+bitter
+ground meat
+sour
+cucumber
+ghee
+cumin
+to fry
+bay leaf
+to weigh
+cinnamon
+salty
+mint
+okra
+butter
+sweet
+bread
+clove
+spinach
+black cumin
+to boil
+uncooked
+to serve food
+happiness
+sugar
+juice
+piece
+lemon
+finished
+cookie
+opportunity
+et cetera
+liquor
+vegetarian
+delicious
+upper
+open
+to open
+hallway
+flower vase
+platform
+balcony
+lower
+veranda
+storey
+storeyed
+unfinished
+finished
+town
+edge
+field
+village
+cow
+animal
+pond
+paved
+tree
+flower
+monkey
+goat
+vine
+water buffalo
+fish
+guava
+different
+yesterday
+tomorrow
+in the middle of
+weekend
+to enter
+upon
+two days ago
+day after tomorrow
+previously
+first
+previous
+last
+cute
+childhood
+crowd
+that is to say
+colorful
+to go back
+when
+then
+as a kid
+at the age of
+years ago
+owl
+camel
+insect
+microbe
+dangerous
+donkey
+rose
+grass
+horse
+bird
+ant
+mouse
+gecko
+jungle
+wild
+life force
+butterfly
+parrot
+moth
+plant
+flower
+vine
+bull
+bear
+sheep
+fly
+crocodile
+mosquito
+fox
+lion
+snake
+elephant
+deer
+darkness
+stranger
+now
+separate
+separately
+history
+to fly
+story
+a lot
+idea
+doll
+intersection
+rod
+era
+certainly
+young
+youth
+as
+who
+to fear
+to scold
+during
+to catch
+neighborhood
+kite
+fairy
+love
+manner
+best
+throught
+ghost
+fun
+recreation
+to strike
+neighborhood
+hard work
+king
+queen
+et cetera
+right there
+science
+chess
+strict
+literature
+to recite
+only
+among themselves
+corner
+to pull
+activity
+to stroll
+to search for
+scene
+good for nothing
+to play
+to debate
+repeatedly
+drowded
+joke
+fun
+to enjoy
+fragrance
+environment
+noise
+music
+female friend of a female
+television series
+laughter
+to laugh
+to joke around
+because
+to be published
+life
+magazine
+best
+but
+importance
+important
+king
+person
+perhaps
+hunting
+inside
+darkness
+incense
+various
+fire
+voice
+when
+law
+dog
+trash
+to drive
+to burn
+inspection
+to be awake
+who
+to stop
+salary
+to determine
+to be determined
+to swim
+to enter
+to enroll in
+distant
+a while
+to pay due attention to
+law
+sleepy
+to rear
+to drink
+to spread
+French
+rifle
+cat
+speech
+forbidden
+to repair
+candle
+continuously
+alcohol
+noise
+strict
+musical instrument
+cigarette
+hostel
+to cover with
+haircut
+according to
+to spend
+to pass
+to heat
+to leave
+since
+therefore
+birthday
+as soon as possible
+to cover
+manners
+preparations
+gift
+pain
+scarf
+religious
+to keep in mind
+angry
+essay
+stomach
+thirst
+illness
+boredom
+hunger
+problem
+relative
+clothing
+body
+to be cold
+advice
+tidy
+head
+early in the morning
+solution
+although
+to become
+practice
+let's
+honor
+flight
+blanket
+queue
+successful
+how about
+whenever
+to feel like
+so that
+pain
+medicine
+belt
+behavior
+to behave
+to fasten
+God
+belief in
+part
+journey
+traveler
+sentence
+to participate
+culture
+behavior
+airport
+airplane
+next
+regret
+intention
+novel
+to show around
+certainly
+to stop
+invitation
+distress
+plans
+free time
+future
+to forgive
+to introduce
+congratulations
+opportunity
+to depart
+busy
+best wishes
+connection
+arrangement
+flight
+fare
+fort
+ruins
+car
+to roam
+to depart
+to apply for
+ticket
+train
+train car
+prepared
+dargah
+decision
+to book
+to fill out
+destinaty
+to enjoy
+palace
+to depart
+train
+return
+passenger
+seat
+tour
+station
+hope
+expectation
+anywhere
+where
+to feel like
+fear
+so that
+in fact
+definite
+auspicious
+worthy
+possible
+possibility
+to go with
+key
+to be late
+identification card
+to speak
+departure
+passenger
+service
+ahead
+left-hand
+intersection
+direction
+in the direction of
+police station
+right-hand
+to appear to
+distant
+nearby
+railtrack
+to cross
+bridge
+gas station
+to turn
+road
+straight
+station
+hand
+population
+Asia
+subcontinent
+side
+geography
+part
+capital
+world
+province
+region
+located
+prime minister
+bay
+valley
+boulder
+peak
+Earth
+waterfall
+lake
+island
+dune
+shore
+river
+countryside
+stream
+canal
+mountain chain
+mountain
+mountainous
+nature
+natural
+plain
+desert
+sand
+ocean
+unique
+importance
+historical
+art
+to be called
+center
+on the basis of
+by means of
+cikan
+information
+to be linked to
+connected
+piece of jewelry
+lake
+praise
+throughout the world
+tourist destination
+natural
+without limit
+famous
+palace
+a means
+popular
+culture
+civilization
+cultural
+literature
+literary
+independence
+delicious
+mansion
+ruler
+basis
+embroidery
+to be known as
+kundan
+ruins
+specialty
+era
+knowledge
+refinement
+praise
+to carry out
+to call
+role
+mausoleum
+coming together
+capital
+popular
+popularity
+culture
+literary
+cultural
+located
+delicious
+ruler
 
-gets to page 213
+up to unit 8/chapter 37/page 483
