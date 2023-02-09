@@ -1,0 +1,11 @@
+[
+
+    ["सोमवार", "Monday", "somvaar"],
+    ["मंगलवार", "Tuesday", "mngalvaar"],
+    ["बुधवार", "Wednesday", "budhvaar"],
+    ["गुरुवार", "Thursday", "gauruvaar"],
+    ["शुक्रवार", "Friday", "shukrvaar"],
+    ["शनिवार", "Saturday", "shnivaar"],
+    ["रविवार", "Sunday", "rvivaar"]
+
+]

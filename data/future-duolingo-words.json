@@ -29,27 +29,6 @@
  ["सुनो", "listen"],
  ["तो", "then"],
 
- ["अगस्त", "August"],
- ["अक्टूबर", "October"],
- ["अप्रैल", "April"],
- ["बुधवार", "Wednesday"],
- ["दिसंबर", "December"],
- ["गुरुवार", "Thursday"],
- ["जनवरी", "January"],
- ["जुलाई", "July"],
- ["जून", "June"],
- ["मंगलवार", "Tuesday"],
- ["मार्च", "March"],
- ["मई", "May"],
- ["नवंबर", "November"],
- ["फ़रवरी", "February"],
- ["रविवार", "Sunday"],
- ["साल", "year"],
- ["शनिवार", "Saturday"],
- ["शुक्रवार", "Friday"],
- ["सितंबर", "September"],
- ["सोमवार", "Monday"],
-
  ["भाई-बहन", "siblings"],
  ["चाचा", "uncle (dad's little bro)"],
  ["बुआ", "aunt (dad's sis)"],
@@ -118,19 +97,6 @@
  ["पिया", "drank"],
  ["तूने", "you"],
  ["उन्होंने", "they"],
- ["उसने", "he"],
-
- ["छाता", "umbrella"],
- ["गर्मी", "heat"],
- ["जुराब", "socks"],
- ["क़मीज़", "shirt"],
- ["कपड़े", "clothes"],
- ["लग", "looking"],
- ["लगती", "looks like"],
- ["मौसम", "weather"],
- ["पहनो", "wear"],
- ["पतलून", "trousers"],
- ["सर्दी", "winter"],
- ["ठंड", "cold"]
+ ["उसने", "he"]
 
 ]
