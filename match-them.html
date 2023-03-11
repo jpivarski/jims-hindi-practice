@@ -342,7 +342,18 @@ function pick_five() {
   }
 
   for (var i = 0; i < 5; i++) {
-    document.getElementById("hi-" + i.toString() + "-text").innerHTML = word_list[indexes[i]][0];
+    var scripted = null;
+    if (script[0] === "d") {
+      scripted = word_list[indexes[i]][0];
+    }
+    else if (script[0] === "r") {
+      scripted = word_list[indexes[i]][2];
+    }
+    else {
+      scripted = word_list[indexes[i]][0] + " : " + word_list[indexes[i]][2];
+    }
+
+    document.getElementById("hi-" + i.toString() + "-text").innerHTML = scripted;
     document.getElementById("en-" + permutation[i].toString() + "-text").innerHTML = word_list[indexes[i]][1];
     document.getElementById("wiktionary-" + i.toString()).href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(word_list[indexes[i]][0]) + "#Hindi";
     document.getElementById("google-" + i.toString()).href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(word_list[indexes[i]][0]);
@@ -354,6 +365,7 @@ function pick_five() {
 
 var word_list_filename = "word-list-3-base.json";
 var distance = null;
+var script = "both";
 
 var url_params = new URLSearchParams(window.location.search);
 if (url_params.has("d")) {
@@ -361,6 +373,9 @@ if (url_params.has("d")) {
 }
 if (url_params.has("near")) {
   distance = DamerauLevenshtein();
+}
+if (url_params.has("script")) {
+  script = url_params.get("script");
 }
 
 var word_list = [];
