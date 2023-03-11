@@ -350,7 +350,7 @@ function pick_five() {
       scripted = word_list[indexes[i]][2];
     }
     else {
-      scripted = word_list[indexes[i]][0] + " | " + word_list[indexes[i]][2];
+      scripted = word_list[indexes[i]][0] + "<br>" + word_list[indexes[i]][2];
     }
 
     document.getElementById("hi-" + i.toString() + "-text").innerHTML = scripted;
