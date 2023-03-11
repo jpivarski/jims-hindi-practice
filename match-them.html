@@ -428,7 +428,7 @@ function change_color(lang, num, color) {
 
 function say(num) {
     var speak = new SpeechSynthesisUtterance();
-    speak.text = document.getElementById("hi-" + num.toString() + "-text").textContent;
+    speak.text = document.getElementById("hi-" + num.toString() + "-text").innerHTML.replace(/<br>.*/, "");
     speak.lang = "hi-IN";
     window.speechSynthesis.speak(speak);
 }
