@@ -53,7 +53,7 @@ var response = document.getElementById("response");
 
 function say() {
   var speak = new SpeechSynthesisUtterance();
-  speak.text = document.getElementById("word").textContent;
+  speak.text = document.getElementById("word").textContent.replace(/\|.*/, "");
   speak.lang = "hi-IN";
   window.speechSynthesis.speak(speak);
 }
