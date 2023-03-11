@@ -27,8 +27,6 @@ input[type=checkbox] {
   <body>
     <div style="margin: 30px;">
         <div style="font-size: 36px;">
-            <span id="transliteration" style="float: right;"></span>
-            <br clear="right">
             <span id="word" class="half">किताब</span>
         </div>
         <div style="margin-top: 30px;">
@@ -84,16 +82,25 @@ function reset() {
   document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]) + "#Hindi";
   document.getElementById("google").href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(item[0]);
 
-  document.getElementById("word").textContent = item[0];
-  if (item.length > 2) {
-    document.getElementById("transliteration").textContent = item[2];
+  var scripted = null;
+  if (script[0] === "d") {
+    scripted = item[0];
   }
+  else if (script[0] === "r") {
+    scripted = item[2];
+  }
+  else {
+    scripted = item[0] + " | " + item[2];
+  }
+
+  document.getElementById("word").textContent = scripted;
   document.getElementById("response").value = "";
   translation = item[1].replace(/\(.*\)/, "").trim();
   say();
 }
 
 var word_list_filename = "word-list-3.json";
+var script = "both";
 
 var url_params = new URLSearchParams(window.location.search);
 if (url_params.has("d")) {
@@ -102,6 +109,9 @@ if (url_params.has("d")) {
 if (url_params.has("i")) {
   document.getElementById("random").checked = false;
   index = parseInt(url_params.get("i"));
+}
+if (url_params.has("script")) {
+  script = url_params.get("script");
 }
 
 var word_list = [];
