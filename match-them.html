@@ -120,6 +120,181 @@
 </div>
     <script>
 
+// from https://stackoverflow.com/a/69904838/1623645
+function DamerauLevenshtein(prices, damerau) {
+  // 'prices' customisation of the edit costs by passing an object with optional 'insert', 'remove', 'substitute', and
+  // 'transpose' keys, corresponding to either a constant number, or a function that returns the cost. The default cost
+  // for each operation is 1. The price functions take relevant character(s) as arguments, should return numbers, and
+  // have the following form:
+  //
+  // insert: function (inserted) { return NUMBER; }
+  // remove: function (removed) { return NUMBER; }
+  // substitute: function (from, to) { return NUMBER; }
+  // transpose: function (backward, forward) { return NUMBER; }
+  //
+  // The damerau flag allows us to turn off transposition and only do plain Levenshtein distance.
+
+  if (damerau !== false) {
+    damerau = true;
+  }
+  if (!prices) {
+    prices = {};
+  }
+  let insert, remove, substitute, transpose;
+
+  switch (typeof prices.insert) {
+    case 'function':
+      insert = prices.insert;
+      break;
+    case 'number':
+      insert = function (c) {
+        return prices.insert;
+      };
+      break;
+    default:
+      insert = function (c) {
+        return 1;
+      };
+      break;
+  }
+
+  switch (typeof prices.remove) {
+    case 'function':
+      remove = prices.remove;
+      break;
+    case 'number':
+      remove = function (c) {
+        return prices.remove;
+      };
+      break;
+    default:
+      remove = function (c) {
+        return 1;
+      };
+      break;
+  }
+
+  switch (typeof prices.substitute) {
+    case 'function':
+      substitute = prices.substitute;
+      break;
+    case 'number':
+      substitute = function (from, to) {
+        return prices.substitute;
+      };
+      break;
+    default:
+      substitute = function (from, to) {
+        return 1;
+      };
+      break;
+  }
+
+  switch (typeof prices.transpose) {
+    case 'function':
+      transpose = prices.transpose;
+      break;
+    case 'number':
+      transpose = function (backward, forward) {
+        return prices.transpose;
+      };
+      break;
+    default:
+      transpose = function (backward, forward) {
+        return 1;
+      };
+      break;
+  }
+
+  function distance(down, across) {
+    // http://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
+    let ds = [];
+    if (down === across) {
+      return 0;
+    } else {
+      down = down.split('');
+      down.unshift(null);
+      across = across.split('');
+      across.unshift(null);
+      down.forEach(function (d, i) {
+        if (!ds[i]) {
+          ds[i] = [];
+        }
+        across.forEach(function (a, j) {
+          if (i === 0 && j === 0) {
+            ds[i][j] = 0;
+          } else if (i === 0) {
+            // Empty down (i == 0) -> across[1..j] by inserting
+            ds[i][j] = ds[i][j - 1] + insert(a);
+          } else if (j === 0) {
+            // Down -> empty across (j == 0) by deleting
+            ds[i][j] = ds[i - 1][j] + remove(d);
+          } else {
+            // Find the least costly operation that turns the prefix down[1..i] into the prefix across[1..j] using
+            // already calculated costs for getting to shorter matches.
+            ds[i][j] = Math.min(
+              // Cost of editing down[1..i-1] to across[1..j] plus cost of deleting
+              // down[i] to get to down[1..i-1].
+              ds[i - 1][j] + remove(d),
+              // Cost of editing down[1..i] to across[1..j-1] plus cost of inserting across[j] to get to across[1..j].
+              ds[i][j - 1] + insert(a),
+              // Cost of editing down[1..i-1] to across[1..j-1] plus cost of substituting down[i] (d) with across[j]
+              // (a) to get to across[1..j].
+              ds[i - 1][j - 1] + (d === a ? 0 : substitute(d, a))
+            );
+            // Can we match the last two letters of down with across by transposing them? Cost of getting from
+            // down[i-2] to across[j-2] plus cost of moving down[i-1] forward and down[i] backward to match
+            // across[j-1..j].
+            if (damerau && i > 1 && j > 1 && down[i - 1] === a && d === across[j - 1]) {
+              ds[i][j] = Math.min(ds[i][j], ds[i - 2][j - 2] + (d === a ? 0 : transpose(d, down[i - 1])));
+            }
+          }
+        });
+      });
+      return ds[down.length - 1][across.length - 1];
+    }
+  }
+  return distance;
+}
+
+function distance_matches(word) {
+  var out = [-1, -1, -1, -1, -1, -1, -1];
+  var dst = [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0];
+  for (i in word_list) {
+    var item = word_list[i][2];
+    var d = distance(word, item);
+    if (out[0] === -1  ||  d < dst[0]) {
+      out[0] = i;
+      dst[0] = d;
+    }
+    else if (out[1] === -1  ||  d < dst[1]) {
+      out[1] = i;
+      dst[1] = d;
+    }
+    else if (out[2] === -1  ||  d < dst[2]) {
+      out[2] = i;
+      dst[2] = d;
+    }
+    else if (out[3] === -1  ||  d < dst[3]) {
+      out[3] = i;
+      dst[3] = d;
+    }
+    else if (out[4] === -1  ||  d < dst[4]) {
+      out[4] = i;
+      dst[4] = d;
+    }
+    else if (out[5] === -1  ||  d < dst[5]) {
+      out[5] = i;
+      dst[5] = d;
+    }
+    else if (out[6] === -1  ||  d < dst[6]) {
+      out[6] = i;
+      dst[6] = d;
+    }
+  }
+  return out;
+}
+
 var correct = [0, 1, 2, 3, 4];
 
 var active_hi = -1;
@@ -132,12 +307,19 @@ function pick_five() {
   }
 
   var indexes = [];
-  while (indexes.length < 7) {
-    var index = Math.floor(((Math.random())) * word_list.length);
-    if (!indexes.includes(index)) {
-      indexes.push(index);
+  if (distance === null) {
+    while (indexes.length < 7) {
+      var index = Math.floor(((Math.random())) * word_list.length);
+      if (!indexes.includes(index)) {
+        indexes.push(index);
+      }
     }
   }
+  else {
+    var index = Math.floor(((Math.random())) * word_list.length);
+    indexes = distance_matches(word_list[index][2]);
+  }
+
   var permutation = [];
   while (permutation.length < 7) {
     var index = Math.floor(Math.random() * 7);
@@ -170,11 +352,15 @@ function pick_five() {
   }
 }
 
-var word_list_filename = "word-list.json";
+var word_list_filename = "word-list-3-base.json";
+var distance = null;
 
 var url_params = new URLSearchParams(window.location.search);
 if (url_params.has("d")) {
   word_list_filename = url_params.get("d");
+}
+if (url_params.has("near")) {
+  distance = DamerauLevenshtein();
 }
 
 var word_list = [];

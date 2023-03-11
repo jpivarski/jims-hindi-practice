@@ -89,11 +89,11 @@ function reset() {
     document.getElementById("transliteration").textContent = item[2];
   }
   document.getElementById("response").value = "";
-  translation = item[1];
+  translation = item[1].replace(/\(.*\)/, "").trim();
   say();
 }
 
-var word_list_filename = "word-list-2.json";
+var word_list_filename = "word-list-3.json";
 
 var url_params = new URLSearchParams(window.location.search);
 if (url_params.has("d")) {
