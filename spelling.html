@@ -46,6 +46,9 @@ input[type=checkbox] {
             </form>
         </div>
         <div style="margin-top: 80px; font-size: 36px;">
+          <span id="etymology"></span>
+        </div>
+        <div style="margin-top: 80px; font-size: 36px;">
           <form action="javascript:void(0);">
             <input type="checkbox" name="options" value="random" id="random" checked> random<br>
           </form>
@@ -943,6 +946,10 @@ function reset() {
   document.getElementById("word").textContent = item[0];
   document.getElementById("translation").textContent = item[1] + " (" + index_used.toString() + ")";
   document.getElementById("response").value = "";
+  if (item.length > 3) {
+    document.getElementByID("etymology").textContent = item[4];
+  }
+
   say();
 }
 

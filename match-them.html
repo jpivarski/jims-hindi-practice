@@ -315,6 +315,16 @@ function pick_five() {
       }
     }
   }
+  else if (distance === "order") {
+    var index = Math.floor(((Math.random())) * (word_list.length - 7));
+    indexes.push(index + 0);
+    indexes.push(index + 1);
+    indexes.push(index + 2);
+    indexes.push(index + 3);
+    indexes.push(index + 4);
+    indexes.push(index + 5);
+    indexes.push(index + 6);
+  }
   else {
     var index = Math.floor(((Math.random())) * word_list.length);
     indexes = distance_matches(word_list[index][2]);
@@ -372,7 +382,12 @@ if (url_params.has("d")) {
   word_list_filename = url_params.get("d");
 }
 if (url_params.has("near")) {
-  distance = DamerauLevenshtein();
+  if (url_params.get("near") === "sound") {
+    distance = DamerauLevenshtein();
+  }
+  else if (url_params.get("near") === "meaning") {
+    distance = "order";
+  }
 }
 if (url_params.has("script")) {
   script = url_params.get("script");
