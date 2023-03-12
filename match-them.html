@@ -382,7 +382,7 @@ if (url_params.has("d")) {
   word_list_filename = url_params.get("d");
 }
 if (url_params.has("near")) {
-  if (url_params.get("near") === "sound") {
+  if (url_params.get("near") === "spelling") {
     distance = DamerauLevenshtein();
   }
   else if (url_params.get("near") === "meaning") {
