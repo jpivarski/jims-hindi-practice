@@ -949,6 +949,9 @@ function reset() {
   if (item.length > 3) {
     document.getElementById("etymology").textContent = item[3];
   }
+  else {
+    document.getElementById("etymology").textContent = "";
+  }
 
   say();
 }
