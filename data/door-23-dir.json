@@ -1,0 +1,10 @@
+[
+    ["उत्तर", "north", "uttar"],
+    ["उत्तरी", "northern", "uttari"],
+    ["दक्षिण", "south", "dakshin"],
+    ["दक्षिणी", "southern", "dakshini"],
+    ["पूरब", "east", "purab"],
+    ["पूरबी", "eastern", "poorabi"],
+    ["पश्चिम", "west", "pashchim"],
+    ["पश्चिमी", "western", "pashchimi"]
+]
