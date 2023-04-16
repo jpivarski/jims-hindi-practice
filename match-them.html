@@ -432,6 +432,9 @@ function maybe_pick_five() {
       change_color("en", 4, "#f0f0f0");
       change_color("en", 5, "#f0f0f0");
       change_color("en", 6, "#f0f0f0");
+      if (document.getElementById("auto-advance").checked) {
+        activate_next_hi();
+      }
     }, 250);
   }
 }
@@ -511,10 +514,10 @@ function activate(lang, num) {
         change_color("en", num, "lightblue");
         active_hi = -1;
         active_en = -1;
-        maybe_pick_five();
         if (document.getElementById("auto-advance").checked) {
           activate_next_hi();
         }
+        maybe_pick_five();
       } else {
         change_color("hi", active_hi, "pink");
         change_color("en", num, "pink");
@@ -613,10 +616,11 @@ document.getElementById("show-hindi").addEventListener("click", function() {
     }
   }
 });
-
-if (document.getElementById("auto-advance").checked) {
-  activate_next_hi();
-}
+document.getElementById("auto-advance").addEventListener("click", function() {
+  if (document.getElementById("auto-advance").checked) {
+    activate_next_hi();
+  }
+});
         </script>
     </body>
 </html>
