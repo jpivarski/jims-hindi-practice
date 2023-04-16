@@ -71,6 +71,11 @@
         </form>
       </div>
       <div style="margin-top: 80px; font-size: 36px;">
+        <form action="javascript:void(0);">
+          <input type="checkbox" name="options" value="auto-advance" id="auto-advance"> auto-advance<br>
+        </form>
+      </div>
+      <div style="margin-top: 80px; font-size: 36px;">
           Wiktionary: <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-0" style="margin-left: 10px">0</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-1" style="margin-left: 10px">1</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-2" style="margin-left: 10px">2</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-3" style="margin-left: 10px">3</a> <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary-4" style="margin-left: 10px">4</a>
       </div>
       <div style="margin-top: 80px; font-size: 36px;">
@@ -448,6 +453,24 @@ function say(num) {
     window.speechSynthesis.speak(speak);
 }
 
+function activate_next_hi() {
+  if (is_clickable("hi", 0)) {
+    activate("hi", 0);
+  }
+  else if (is_clickable("hi", 1)) {
+    activate("hi", 1);
+  }
+  else if (is_clickable("hi", 2)) {
+    activate("hi", 2);
+  }
+  else if (is_clickable("hi", 3)) {
+    activate("hi", 3);
+  }
+  else if (is_clickable("hi", 4)) {
+    activate("hi", 4);
+  }
+}
+
 function activate(lang, num) {
   if (lang == "hi") {
     document.getElementById("hi-" + num.toString() + "-text").style.display = "block";
@@ -489,6 +512,9 @@ function activate(lang, num) {
         active_hi = -1;
         active_en = -1;
         maybe_pick_five();
+        if (document.getElementById("auto-advance").checked) {
+          activate_next_hi();
+        }
       } else {
         change_color("hi", active_hi, "pink");
         change_color("en", num, "pink");
@@ -587,6 +613,10 @@ document.getElementById("show-hindi").addEventListener("click", function() {
     }
   }
 });
+
+if (document.getElementById("auto-advance").checked) {
+  activate_next_hi();
+}
         </script>
     </body>
 </html>
