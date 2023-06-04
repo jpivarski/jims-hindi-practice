@@ -301,17 +301,29 @@ function distance_matches(word) {
 }
 
 var correct = [0, 1, 2, 3, 4];
+var trial = [];
+var indexes = [];
 
 var active_hi = -1;
 var active_en = -1;
 
+var callback = function() {};
+
 function pick_five() {
+  for (var i = 0;  i < trial.length;  i++) {
+    if (trial[i] == "yes") {
+      word_list_correct[indexes[i]] = true;
+    }
+  }
+
+  callback();
+
   if (word_list.length < 7) {
     console.log("couldn't get word list");
     return;
   }
 
-  var indexes = [];
+  indexes = [];
   if (distance === null) {
     while (indexes.length < 7) {
       var index = Math.floor(((Math.random())) * word_list.length);
@@ -347,6 +359,7 @@ function pick_five() {
   correct[2] = permutation[2];
   correct[3] = permutation[3];
   correct[4] = permutation[4];
+  trial = ["maybe", "maybe", "maybe", "maybe", "maybe"];
 
   if (!document.getElementById("show-hindi").checked) {
     document.getElementById("hi-0-text").style.display = "none";
@@ -378,7 +391,7 @@ function pick_five() {
   }
 }
 
-var word_list_filename = "word-list-3-base.json";
+var word_list_filename = "current.json";
 var distance = null;
 var script = "both";
 
@@ -399,11 +412,15 @@ if (url_params.has("script")) {
 }
 
 var word_list = [];
+var word_list_correct = [];
 
 fetch("./data/" + word_list_filename).then(function(response) {
   return response.json();
 }).then(function(data) {
   word_list = data;
+  for (var i = 0;  i < word_list.length;  i++) {
+    word_list_correct[i] = false;
+  }
 }).then(function() {
   pick_five();
 }).catch(function(error) {
@@ -510,6 +527,9 @@ function activate(lang, num) {
   } else {
     if (lang == "en") {
       if (correct[active_hi] == num) {
+        if (trial[active_hi] == "maybe") {
+          trial[active_hi] = "yes";
+        }
         change_color("hi", active_hi, "lightblue");
         change_color("en", num, "lightblue");
         active_hi = -1;
@@ -519,6 +539,7 @@ function activate(lang, num) {
         }
         maybe_pick_five();
       } else {
+        trial[active_hi] = "no";
         change_color("hi", active_hi, "pink");
         change_color("en", num, "pink");
         var this_hi = active_hi;
@@ -532,12 +553,16 @@ function activate(lang, num) {
       }
     } else {
       if (correct[num] == active_en) {
+        if (trial[num] == "maybe") {
+          trial[num] = "yes";
+        }
         change_color("hi", num, "lightblue");
         change_color("en", active_en, "lightblue");
         active_hi = -1;
         active_en = -1;
         maybe_pick_five();
       } else {
+        trial[num] = "no";
         change_color("hi", num, "pink");
         change_color("en", active_en, "pink");
         var this_hi = num;

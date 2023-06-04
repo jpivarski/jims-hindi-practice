@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jim's Hindi practice</title>
+    <style>
+
+iframe {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  width: 100%;
+  height: 791px;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <div id="here"></div>
+
+  </body>
+  <script>
+
+var word_list_filename = "current.json";
+
+var url_params = new URLSearchParams(window.location.search);
+if (url_params.has("d")) {
+  word_list_filename = url_params.get("d");
+}
+
+var word_list = [];
+
+fetch("./data/" + word_list_filename).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  word_list = data;
+}).catch(function(error) {
+  console.log(error);
+});
+
+document.getElementById("here").innerHTML = '<iframe id="nested" src="spelling.html?d=' + word_list_filename + '" loading="eager">';
+
+var nested = document.getElementById("nested");
+
+function num_incorrect() {
+  var count = 0;
+  for (var item of nested.contentWindow.word_list_correct) {
+    if (!item) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+nested.onload = function() {
+  nested.contentDocument.getElementById("letters").parentElement.style.display = "none";
+
+  nested.contentWindow.callback = function() {
+    if (num_incorrect() == 18) {
+      nested.onload = function() {
+        nested.contentWindow.callback = function() {
+          if (num_incorrect() == 16) {
+
+            nested.onload = function() {
+              nested.contentWindow.callback = function() {
+                if (num_incorrect() == 18) {
+                  nested.src = 'done.html';
+                }
+              }
+
+            }
+            nested.src = 'translate.html?script=d&d=' + word_list_filename;
+
+          }
+        }
+      }
+      nested.src = 'match-them.html?script=d&d=' + word_list_filename;
+    }
+ }
+}
+
+  </script>
+</html>

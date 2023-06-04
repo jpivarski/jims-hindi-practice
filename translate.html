@@ -59,11 +59,11 @@ function say() {
 }
 
 var index = 0;
+var index_used = null;
 var translation = "";
 
 function reset() {
   var item = null;
-  var index_used = null;
   if (document.getElementById("random").checked) {
     while (item === null) {
       index_used = Math.floor(((Math.random())) * word_list.length);
@@ -100,7 +100,7 @@ function reset() {
   say();
 }
 
-var word_list_filename = "word-list-3-base.json";
+var word_list_filename = "current.json";
 var script = "both";
 
 var url_params = new URLSearchParams(window.location.search);
@@ -116,11 +116,15 @@ if (url_params.has("script")) {
 }
 
 var word_list = [];
+var word_list_correct = [];
 
 fetch("./data/" + word_list_filename).then(function(response) {
   return response.json();
 }).then(function(data) {
   word_list = data;
+  for (var i = 0;  i < word_list.length;  i++) {
+    word_list_correct[i] = false;
+  }
 }).then(function() {
   reset();
 }).catch(function(error) {
@@ -129,10 +133,14 @@ fetch("./data/" + word_list_filename).then(function(response) {
 
 document.getElementById("word").addEventListener("click", say);
 
+var callback = function() {};
+
 response.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
     if (document.getElementById("response").value.toLowerCase().trim() == translation.toLowerCase()) {
+      word_list_correct[index_used] = true;
+      callback();
       reset();
     }
     else {
