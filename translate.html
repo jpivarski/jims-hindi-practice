@@ -67,7 +67,9 @@ function reset() {
   if (document.getElementById("random").checked) {
     while (item === null) {
       index_used = Math.floor(((Math.random())) * word_list.length);
-      item = word_list[index_used];
+      if (!word_list_correct[index_used]) {
+        item = word_list[index_used];
+      }
     }
     index = index_used + 1;
   }
@@ -135,16 +137,22 @@ document.getElementById("word").addEventListener("click", say);
 
 var callback = function() {};
 
+var recently_wrong = false;
+
 response.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
     if (document.getElementById("response").value.toLowerCase().trim() == translation.toLowerCase()) {
-      word_list_correct[index_used] = true;
+      if (!recently_wrong) {
+        word_list_correct[index_used] = true;
+      }
       callback();
       reset();
+      recently_wrong = false;
     }
     else {
       document.getElementById("response").value = translation;
+      recently_wrong = true;
     }
   }
 });

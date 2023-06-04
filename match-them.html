@@ -327,6 +327,11 @@ function pick_five() {
   if (distance === null) {
     while (indexes.length < 7) {
       var index = Math.floor(((Math.random())) * word_list.length);
+      var num_tries = 0;
+      while (word_list_correct[index]  &&  num_tries < 3) {
+        index = Math.floor(((Math.random())) * word_list.length);
+        num_tries += 1;
+      }
       if (!indexes.includes(index)) {
         indexes.push(index);
       }

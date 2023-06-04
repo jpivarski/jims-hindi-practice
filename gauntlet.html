@@ -70,7 +70,6 @@ function phase2() {
 
 function phase3() {
   if (num_incorrect() == 0) {
-
     nested.onload = phase4;
     nested.src = 'translate.html?script=d&d=' + word_list_filename;
 
@@ -80,7 +79,7 @@ function phase3() {
 function phase4() {
   nested.contentWindow.callback = function() {
     if (num_incorrect() == 0) {
-      nested.src = 'done.html';
+      alert("DONE!");
     }
   }
 }

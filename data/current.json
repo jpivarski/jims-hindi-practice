@@ -7,18 +7,5 @@
     ["अँग्रेज़ी", "English", "angrezi"],
     ["हिंदी", "Hindi", "hindi"],
     ["मराठी", "Marathi", "maraathee"],
-    ["बंगाली", "Bengali", "bangali"],
-
-    ["जनवरी", "January", "janvari"],
-    ["फ़रवरी", "February", "farvari"],
-    ["मार्च", "March", "march"],
-    ["अप्रैल", "April", "april"],
-    ["मई", "May", "may"],
-    ["जून", "June", "june"],
-    ["जुलाई", "July", "july"],
-    ["अगस्त", "August", "agast"],
-    ["सितंबर", "September", "sitambar"],
-    ["अक्टूबर", "October", "oktober"],
-    ["नवंबर", "November", "november"],
-    ["दिसंबर", "December", "disambar"]
+    ["बंगाली", "Bengali", "bangali"]
 ]
