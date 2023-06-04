@@ -10,7 +10,7 @@ iframe {
   padding: 0px;
   border: none;
   width: 100%;
-  height: 791px;
+  height: 1600px;
 }
 
     </style>
@@ -57,14 +57,14 @@ nested.onload = function() {
   nested.contentDocument.getElementById("letters").parentElement.style.display = "none";
 
   nested.contentWindow.callback = function() {
-    if (num_incorrect() == 18) {
+    if (num_incorrect() == 0) {
       nested.onload = function() {
         nested.contentWindow.callback = function() {
-          if (num_incorrect() == 16) {
+          if (num_incorrect() == 0) {
 
             nested.onload = function() {
               nested.contentWindow.callback = function() {
-                if (num_incorrect() == 18) {
+                if (num_incorrect() == 0) {
                   nested.src = 'done.html';
                 }
               }
