@@ -23,10 +23,14 @@ iframe {
   <script>
 
 var word_list_filename = "current.json";
+var skip_spelling = false;
 
 var url_params = new URLSearchParams(window.location.search);
 if (url_params.has("d")) {
   word_list_filename = url_params.get("d");
+}
+if (url_params.has("skip")) {
+  skip_spelling = true;
 }
 
 var word_list = [];
@@ -39,10 +43,6 @@ fetch("./data/" + word_list_filename).then(function(response) {
   console.log(error);
 });
 
-document.getElementById("here").innerHTML = '<iframe id="nested" src="spelling.html?d=' + word_list_filename + '" loading="eager">';
-
-var nested = document.getElementById("nested");
-
 function num_incorrect() {
   var count = 0;
   for (var item of nested.contentWindow.word_list_correct) {
@@ -53,31 +53,49 @@ function num_incorrect() {
   return count;
 }
 
-nested.onload = function() {
+function phase1() {
   nested.contentDocument.getElementById("letters").parentElement.style.display = "none";
 
+  nested.contentWindow.callback = phase2;
+}
+
+function phase2() {
+   if (num_incorrect() == 0) {
+     nested.onload = function() {
+       nested.contentWindow.callback = phase3;
+     }
+     nested.src = 'match-them.html?script=d&d=' + word_list_filename;
+   }
+}
+
+function phase3() {
+  if (num_incorrect() == 0) {
+
+    nested.onload = phase4;
+    nested.src = 'translate.html?script=d&d=' + word_list_filename;
+
+  }
+}
+
+function phase4() {
   nested.contentWindow.callback = function() {
     if (num_incorrect() == 0) {
-      nested.onload = function() {
-        nested.contentWindow.callback = function() {
-          if (num_incorrect() == 0) {
-
-            nested.onload = function() {
-              nested.contentWindow.callback = function() {
-                if (num_incorrect() == 0) {
-                  nested.src = 'done.html';
-                }
-              }
-
-            }
-            nested.src = 'translate.html?script=d&d=' + word_list_filename;
-
-          }
-        }
-      }
-      nested.src = 'match-them.html?script=d&d=' + word_list_filename;
+      nested.src = 'done.html';
     }
- }
+  }
+}
+
+var nested = null;
+
+if (skip_spelling) {
+  document.getElementById("here").innerHTML = '<iframe id="nested" src="match-them.html?script=d&d=' + word_list_filename + '" loading="eager">';
+  nested = document.getElementById("nested");
+  nested.onload = phase2;
+}
+else {
+  document.getElementById("here").innerHTML = '<iframe id="nested" src="spelling.html?d=' + word_list_filename + '" loading="eager">';
+  nested = document.getElementById("nested");
+  nested.onload = phase1;
 }
 
   </script>
