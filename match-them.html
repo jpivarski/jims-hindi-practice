@@ -265,7 +265,7 @@ function DamerauLevenshtein(prices, damerau) {
 function distance_matches(word) {
   var out = [-1, -1, -1, -1, -1, -1, -1];
   var dst = [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0];
-  for (i in word_list) {
+  for (var i in word_list) {
     var item = word_list[i][2];
     var d = distance(word, item);
     if (out[0] === -1  ||  d < dst[0]) {

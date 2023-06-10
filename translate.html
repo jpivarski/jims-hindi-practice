@@ -65,6 +65,18 @@ var translation = "";
 function reset() {
   var item = null;
   if (document.getElementById("random").checked) {
+
+    var all_done = true;
+    for (var correct in word_list_correct) {
+      if (!correct) {
+        all_done = false;
+        break;
+      }
+    }
+    if (all_done) {
+      return;
+    }
+
     while (item === null) {
       index_used = Math.floor(((Math.random())) * word_list.length);
       if (!word_list_correct[index_used]) {
