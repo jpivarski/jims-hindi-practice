@@ -66,15 +66,17 @@ function reset() {
   var item = null;
   if (document.getElementById("random").checked) {
 
-    var all_done = true;
-    for (var correct in word_list_correct) {
-      if (!correct) {
-        all_done = false;
-        break;
+    if (word_list_correct.length > 0) {
+      var all_done = true;
+      for (var correct of word_list_correct) {
+        if (!correct) {
+          all_done = false;
+          break;
+        }
       }
-    }
-    if (all_done) {
-      return;
+      if (all_done) {
+        return;
+      }
     }
 
     while (item === null) {
