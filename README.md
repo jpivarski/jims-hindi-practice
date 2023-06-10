@@ -1,4 +1,4 @@
-### [Gauntlet](https://jpivarski.github.io/jims-hindi-practice/gauntlet.html) [(skip spelling)](https://jpivarski.github.io/jims-hindi-practice/gauntlet.html?skip)
+### [Gauntlet](https://jpivarski.github.io/jims-hindi-practice/gauntlet.html?d=door-1.json) [(skip spelling)](https://jpivarski.github.io/jims-hindi-practice/gauntlet.html?d=door-1.json&skip)
 
 #### [Spelling](https://jpivarski.github.io/jims-hindi-practice/spelling.html)
 
