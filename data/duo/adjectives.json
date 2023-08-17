@@ -1,0 +1,31 @@
+[
+
+  ["बड़ा", "big", "bada"],
+  ["थोड़ा", "little", "thoda"],
+  ["लंबा", "long", "lamba"],
+  ["छोटा", "small", "chhota"],
+  ["अच्छा", "good", "achchha"],
+  ["बुरा", "bad", "bura"],
+  ["जवान", "young", "javaan"],
+  ["बूढ़ा", "old", "boodha"],
+  ["पुराना", "old", "puraana"],
+  ["नया", "new", "naya"],
+  ["सुंदर", "beautiful", "sundar"],
+  ["पतला", "thin", "patala"],
+  ["मोटा", "fat", "mota"],
+  ["तेज़", "fast", "tez"],
+  ["धीरे", "slow", "dheere"],
+  ["ख़ुश", "happy", "khush"],
+  ["दुखी", "sad", "dukhee"],
+  ["खुला", "open", "khula"],
+  ["बंद", "closed", "band"],
+
+  ["रंग", "colour", "rang"],
+  ["काला", "black", "kaala"],
+  ["सफ़ेद", "white", "safed"],
+  ["लाल", "red", "laal"],
+  ["पीला", "yellow", "peela"],
+  ["हरा", "green", "hara"],
+  ["नीला", "blue", "neela"]
+
+]

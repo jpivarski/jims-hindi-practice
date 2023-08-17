@@ -1,0 +1,28 @@
+[
+
+  ["आदमी", "man", "aadamee"],
+  ["औरत", "woman", "aurat"],
+  ["लड़का", "boy", "ladaka"],
+  ["लड़की", "girl", "ladakee"],
+  ["बच्चा", "child", "bachcha"],
+
+  ["परिवार", "family", "parivaar"],
+  ["रिश्ता", "relationship", "rishta"],
+  ["रिश्तेदार", "relative", "rishtedaar"],
+  ["दोस्त", "friend", "dost"],
+  ["प्यार", "love", "pyaar"],
+  ["पड़ोसी", "neighbour", "padosee"],
+  ["लोग", "people", "log"],
+
+  ["पिता", "father", "pita"],
+  ["माँ", "mother", "maan"],
+  ["माता-पिता", "parents", "maata-pita"],
+  ["भाई", "brother", "bhaee"],
+  ["बहन", "sister", "bahan"],
+  ["भाई-बहन", "siblings", "bhaee-bahan"],
+  ["बेटा", "son", "beta"],
+  ["बेटी", "daughter", "betee"],
+  ["पति", "husband", "pati"],
+  ["पत्नी", "wife", "patnee"]
+
+]

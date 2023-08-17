@@ -1,0 +1,36 @@
+[
+
+  ["नमस्ते", "hello", "namaste"],
+  ["धन्यवाद", "thank you", "dhanyavaad"],
+  ["ठीक", "okay", "theek"],
+  ["हाँ", "yes", "haan"],
+  ["नहीं", "not", "nahin"],
+  ["मत", "don't", "mat"],
+
+  ["और", "and", "aur"],
+  ["या", "or", "ya"],
+  ["भी", "also", "bhee"],
+  ["दोनों", "both", "donon"],
+  ["क्योंकि", "because", "kyonki"],
+  ["लेकिन", "but", "lekin"],
+  ["हर", "each", "har"],
+  ["शायद", "maybe", "shaayad"],
+  ["कि", "that", "ki"],
+  ["इसलिये", "therefore", "isaliye"],
+  ["अगर", "if", "agar"],
+  ["तो", "then", "to"],
+
+  ["सब", "all", "sab"],
+  ["किसा", "any", "kisaa"],
+  ["कोई", "someone", "koee"],
+  ["कभी", "sometimes", "kabhee"],
+  ["कम", "less", "kam"],
+  ["कई", "many", "kaee"],
+  ["सबसे", "most", "sabase"],
+  ["कुछ", "some", "kuchh"],
+  ["हमेशा", "always", "hamesha"],
+  ["बहुत", "very", "bahut"],
+  ["ज़्यादा", "more", "zyaada"],
+  ["बेहतर", "better", "behatar"]
+
+]

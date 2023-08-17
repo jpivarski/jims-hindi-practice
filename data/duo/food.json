@@ -1,0 +1,37 @@
+[
+
+  ["सेब", "apple", "seb"],
+  ["संतरा", "orange", "santara"],
+  ["केला", "banana", "kela"],
+  ["गाजर", "carrot", "gaajar"],
+  ["आलू", "potato", "aaloo"],
+  ["टमाटर", "tomato", "tamaatar"],
+  ["नींबू", "lemon", "neemboo"],
+  ["आम", "mango", "aam"],
+  ["फल", "fruit", "phal"],
+  ["सब्ज़ी", "vegetable", "sabzee"],
+  ["सलाद", "salad", "salaad"],
+  ["अंडा", "egg", "anda"],
+
+  ["पानी", "water", "paanee"],
+  ["दूध", "milk", "doodh"],
+  ["चाय", "tea", "chaay"],
+  ["तेल", "oil", "tel"],
+  ["शराब", "liquor", "sharaab"],
+  ["चावल", "rice", "chaaval"],
+  ["नमक", "salt", "namak"],
+  ["नमकीन", "salty", "namakeen"],
+  ["चीनी", "sugar", "cheenee"],
+  ["मीठा", "sweet", "meetha"],
+  ["भूखा", "hungry", "bhookha"],
+  ["प्यासा", "thirsty", "pyaasa"],
+
+  ["बोतल", "bottle", "botal"],
+  ["गिलास", "glass", "gilaas"],
+  ["चाकू", "knife", "chaakoo"],
+  ["चम्मच", "spoon", "chammach"],
+  ["नाश्ता", "breakfast", "naashta"],
+  ["शाकाहारी", "vegetarian", "shaakaahaaree"],
+  ["माँसाहारी", "non-vegetarian", "maansaahaaree"]
+
+]

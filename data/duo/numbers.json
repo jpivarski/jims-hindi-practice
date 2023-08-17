@@ -1,0 +1,28 @@
+[
+
+  ["एक", "one", "ek"],
+  ["दो", "two", "do"],
+  ["तीन", "three", "teen"],
+  ["चार", "four", "chaar"],
+  ["पाँच", "five", "paanch"],
+  ["छह", "six", "chhah"],
+  ["सात", "seven", "saat"],
+  ["आठ", "eight", "aath"],
+  ["नौ", "nine", "nau"],
+  ["दस", "ten", "das"],
+  ["सौ", "hundred", "sau"],
+  ["हज़ार", "thousand", "hazaar"],
+  ["डेढ़", "one and a half", "dedh"],
+  ["ढाई", "two and a half", "dhaee"],
+  ["साढ़े", "and a half", "saadhe"],
+  ["आधा", "half", "aadha"],
+  ["पौने", "a quarter", "paune"],
+  ["सवा", "quarter past", "sava"],
+
+  ["पहला", "first", "pahala"],
+  ["दूसरा", "second", "doosara"],
+  ["तीसरा", "third", "teesara"],
+  ["चौथा", "fourth", "chautha"],
+  ["पाँचवा", "fifth", "paanchava"]
+
+]

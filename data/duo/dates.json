@@ -1,0 +1,24 @@
+[
+
+  ["जनवरी", "January", "janavaree"],
+  ["फ़रवरी", "February", "faravaree"],
+  ["मार्च", "March", "maarch"],
+  ["अप्रैल", "April", "aprail"],
+  ["मई", "May", "maee"],
+  ["जून", "June", "joon"],
+  ["जुलाई", "July", "julaee"],
+  ["अगस्त", "August", "agast"],
+  ["सितंबर", "September", "sitambar"],
+  ["अक्टूबर", "October", "aktoobar"],
+  ["नवंबर", "November", "navambar"],
+  ["दिसंबर", "December", "disambar"],
+
+  ["रविवार", "Sunday", "ravivaar"],
+  ["सोमवार", "Monday", "somavaar"],
+  ["मंगलवार", "Tuesday", "mangalavaar"],
+  ["बुधवार", "Wednesday", "budhavaar"],
+  ["गुरुवार", "Thursday", "guruvaar"],
+  ["शुक्रवार", "Friday", "shukravaar"],
+  ["शनिवार", "Saturday", "shanivaar"]
+
+]

@@ -1,0 +1,35 @@
+[
+
+  ["पैसे", "money", "paise"],
+  ["रुपया", "rupee", "rupaya"],
+  ["काम", "work", "kaam"],
+  ["आराम", "rest", "aaraam"],
+
+  ["स्कूल", "school", "skool"],
+  ["शिक्षक", "teacher", "shikshak"],
+  ["जवाब", "answer", "javaab"],
+  ["सही", "correct", "sahee"],
+  ["ग़लत", "wrong", "galat"],
+  ["सवाल", "question", "savaal"],
+  ["आसान", "easy", "aasaan"],
+  ["मुश्किल", "difficulty", "mushkil"],
+  ["मेहनत", "hard work", "mehanat"],
+
+  ["बात", "subject", "baat"],
+  ["लेखक", "author", "lekhak"],
+  ["किताब", "book", "kitaab"],
+  ["चिट्ठी", "letter", "chitthee"],
+  ["अख़बार", "newspaper", "akhabaar"],
+  ["कविता", "poem", "kavita"],
+  ["कहानी", "story", "kahaanee"],
+  ["गाना", "song", "gaanaa"],
+
+  ["शहर", "city", "shahar"],
+  ["गाँव", "village", "gaanv"],
+  ["दुकान", "shop", "dukaan"],
+  ["गाड़ी", "car", "gaadee"],
+  ["सड़क", "road", "sadak"],
+  ["गली", "street", "galee"],
+  ["जगह", "place", "jagah"]
+
+]

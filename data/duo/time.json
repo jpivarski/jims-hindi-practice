@@ -1,0 +1,21 @@
+[
+
+  ["मिनट", "minute", "minat"],
+  ["घंटा", "hour", "ghanta"],
+  ["दिन", "day", "din"],
+  ["हफ़्ता", "week", "hafta"],
+  ["महीना", "month", "maheena"],
+  ["साल", "year", "saal"],
+  ["समय", "time", "samay"],
+  ["बजा", "o'clock", "baja"],
+  ["अब", "now", "ab"],
+
+  ["सुबह", "morning", "subah"],
+  ["दोपहर", "afternoon", "dopahar"],
+  ["शाम", "evening", "shaam"],
+  ["रात", "night", "raat"],
+  ["आज", "today", "aaj"],
+  ["कल", "day from now", "kal"],
+  ["परसों", "two days from now", "parason"]
+
+]

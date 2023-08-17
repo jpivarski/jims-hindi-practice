@@ -1,0 +1,38 @@
+[
+
+  ["जानवर", "animal", "jaanavar"],
+  ["पक्षी", "bird", "pakshee"],
+  ["बिल्ली", "cat", "billee"],
+  ["चूहा", "mouse", "chooha"],
+  ["गाय", "cow", "gaay"],
+  ["कुत्ता", "dog", "kutta"],
+  ["घोड़ा", "horse", "ghoda"],
+  ["हाथी", "elephant", "haathee"],
+  ["मछली", "fish", "machhalee"],
+  ["मोर", "peacock", "mor"],
+  ["कबूतर", "pigeon", "kabootar"],
+
+  ["पौधा", "plant", "paudha"],
+  ["घास", "grass", "ghaas"],
+  ["पेड़", "tree", "ped"],
+  ["फूल", "flower", "phool"],
+  ["पत्ते", "leaves", "patte"],
+  ["ख़ुशबू", "fragrance", "khushaboo"],
+  ["आग", "fire", "aag"],
+  ["तालाब", "pond", "taalaab"],
+  ["नदी", "river", "nadee"],
+
+  ["ठंड", "cold", "thand"],
+  ["सर्दी", "coldness", "sardee"],
+  ["गरम", "hot", "garam"],
+  ["गर्मी", "heat", "garmee"],
+  ["मौसम", "season", "mausam"],
+
+  ["हवा", "air", "hava"],
+  ["बादल", "cloud", "baadal"],
+  ["आसमान", "sky", "aasamaan"],
+  ["सूरज", "sun", "sooraj"],
+  ["चाँद", "moon", "chaand"],
+  ["तारा", "star", "taara"]
+
+]

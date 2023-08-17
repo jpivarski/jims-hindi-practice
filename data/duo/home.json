@@ -1,0 +1,24 @@
+[
+
+  ["बिस्तर", "bed", "bistar"],
+  ["कुर्सी", "chair", "kursee"],
+  ["मेज़", "table", "mez"],
+  ["दीवार", "wall", "deevaar"],
+  ["दरवाज़ा", "door", "daravaaza"],
+  ["ज़मीन", "floor", "zameen"],
+  ["खिड़की", "window", "khidakee"],
+  ["छत", "roof", "chhat"],
+  ["कमरा", "room", "kamara"],
+  ["मकान", "house", "makaan"],
+  ["घर", "home", "ghar"],
+  ["सस्ता", "cheap", "sasta"],
+  ["महँगा", "expensive", "mahanga"],
+
+  ["कपड़े", "clothes", "kapade"],
+  ["पतलून", "trousers", "pataloon"],
+  ["क़मीज़", "shirt", "qameez"],
+  ["जूता", "shoe", "joota"],
+  ["जुराब", "socks", "juraab"],
+  ["छाता", "umbrella", "chhaata"]
+
+]

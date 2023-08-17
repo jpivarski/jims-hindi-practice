@@ -1,0 +1,22 @@
+[
+
+  ["हाथ", "hand", "haath"],
+  ["उँगली", "finger", "ungalee"],
+  ["अँगूठा", "thumb", "angootha"],
+  ["पैर", "leg", "pair"],
+  ["सिर", "head", "sir"],
+  ["बाल", "hair", "baal"],
+  ["दाँत", "tooth", "daant"],
+  ["मुँह", "mouth", "munh"],
+  ["कान", "ear", "kaan"],
+  ["आँख", "eye", "aankh"],
+  ["नाक", "nose", "naak"],
+  ["दिल", "heart", "dil"],
+
+  ["दर्द", "pain", "dard"],
+  ["बीमार", "sick", "beemaar"],
+  ["बुखार", "fever", "bukhaar"],
+  ["स्वस्थ", "healthy", "svasth"],
+  ["दवाई", "medicine", "davaee"]
+
+]

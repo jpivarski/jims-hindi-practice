@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jim's Hindi practice</title>
+    <style>
+.half {
+  border: 0px;
+  margin: 0px;
+  padding: 31px;
+  font-size: 96px;
+}
+
+.whole {
+  width: 90%;
+  border: 1px solid black;
+  margin: 0px;
+  padding: 30px;
+  font-size: 144px;
+}
+
+.split {
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.filler {
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.button {
+  height: 9%;
+  margin-top: 20px;
+  margin-left: auto;
+  border: 2px gray solid;
+  background-color: #f0f0f0;
+}
+
+.button-text {
+  position: relative;
+  bottom: -20px;
+  text-align: center;
+  font-size: 54px;
+}
+
+input[type=checkbox] {
+  margin-top: 20px;
+}
+    </style>
+  </head>
+  <body>
+    <div style="margin: 30px;">
+        <div>
+            <span id="word" class="half">book</span>
+        </div>
+        <div style="margin-top: 30px;">
+            <form action="javascript:void(0);" autocomplete="off">
+              <input autocomplete="false" name="hidden" type="text" style="display: none;">
+              <input type="text" id="hint-response" class="whole" value="" readonly>
+              <input type="text" id="response" class="whole" value="" style="margin-top: 20px;">
+            </form>
+        </div>
+        <div style="font-size: 36px;">
+          <form action="javascript:void(0);">
+            <div class="split" style="left: 10%; margin-left: 10px;">
+              <div class="filler">
+                <div class="button" id="hint">
+                  <div class="button-text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;hint&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="split" style="right: 10%; margin-right: 10px;">
+              <div class="filler">
+                <div class="button" id="say">
+                  <div class="button-text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;say&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input type="checkbox" name="options" value="random" id="random" checked style="margin-top: 180px;"> random<br>
+            <input type="checkbox" name="options" value="say" id="should-say" style="margin-top: 60px;"> say<br>
+          </form>
+        </div>
+        <div style="margin-top: 80px; font-size: 36px;">
+          Wiktionary <a href="https://en.wiktionary.org/wiki/" target="_blank" id="wiktionary">lookup</a>
+        </div>
+        <div style="margin-top: 80px; font-size: 36px;">
+          Google <a href="https://translate.google.com/?sl=hi&tl=en&op=translate&text=" target="_blank" id="google">translate</a>
+        </div>
+      </div>
+    <script>
+
+function say() {
+  var speak = new SpeechSynthesisUtterance();
+  speak.text = anuvaad.replace(/\|.*/, "");
+  speak.lang = "hi-IN";
+  window.speechSynthesis.speak(speak);
+}
+
+var index = 0;
+var index_used = null;
+var anuvaad = "किताब";
+
+function reset() {
+  var item = null;
+  if (document.getElementById("random").checked) {
+
+    if (word_list_correct.length > 0) {
+      var all_done = true;
+      for (var correct of word_list_correct) {
+        if (!correct) {
+          all_done = false;
+          break;
+        }
+      }
+      if (all_done) {
+        return;
+      }
+    }
+
+    while (item === null) {
+      index_used = Math.floor(((Math.random())) * word_list.length);
+      if (!word_list_correct[index_used]) {
+        item = word_list[index_used];
+      }
+    }
+    index = index_used + 1;
+  }
+  else {
+    if (!(0 <= index  &&  index < word_list.length)) {
+      index = 0;
+    }
+    index_used = index;
+    item = word_list[index_used];
+    index += 1;
+  }
+
+  document.getElementById("wiktionary").href = "https://en.wiktionary.org/wiki/" + encodeURIComponent(item[0]) + "#Hindi";
+  document.getElementById("google").href = "https://translate.google.com/?sl=hi&tl=en&op=translate&text=" + encodeURIComponent(item[0]);
+
+  anuvaad = item[0];
+
+  document.getElementById("word").textContent = item[1];
+  document.getElementById("response").value = "";
+  document.getElementById("hint-response").value = "";
+
+  if (document.getElementById("should-say").checked) {
+    say();
+  }
+
+  add_to_hint = 1;
+}
+
+var word_list_filename = "current.json";
+
+var url_params = new URLSearchParams(window.location.search);
+if (url_params.has("d")) {
+  word_list_filename = url_params.get("d");
+}
+if (url_params.has("i")) {
+  document.getElementById("random").checked = false;
+  index = parseInt(url_params.get("i"));
+}
+
+var word_list = [];
+var word_list_correct = [];
+
+fetch("./data/" + word_list_filename).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  word_list = data;
+  for (var i = 0;  i < word_list.length;  i++) {
+    word_list_correct[i] = false;
+  }
+}).then(function() {
+  reset();
+}).catch(function(error) {
+  console.log(error);
+});
+
+var callback = function() {};
+
+var recently_wrong = false;
+
+response.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (document.getElementById("response").value.trim() == anuvaad) {
+      if (!recently_wrong) {
+        word_list_correct[index_used] = true;
+      }
+      callback();
+      reset();
+      recently_wrong = false;
+    }
+    else {
+      hint();
+      recently_wrong = true;
+    }
+  }
+})
+
+document.getElementById("say").addEventListener("click", say);
+
+var add_to_hint = 1;
+
+function hint() {
+  var response = document.getElementById("response").value;
+  var how_many = 0;
+  for (;  how_many < anuvaad.length;  how_many++) {
+    if (response[how_many] != anuvaad[how_many]) {
+      break;
+    }
+  }
+  how_many += add_to_hint;
+  if (how_many > anuvaad.length) {
+    how_many = anuvaad.length;
+  }
+  document.getElementById("hint-response").value = anuvaad.substr(0, how_many);
+  add_to_hint++;
+}
+
+document.getElementById("hint").addEventListener("click", hint);
+
+    </script>
+    </body>
+</html>
