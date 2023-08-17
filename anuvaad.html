@@ -33,7 +33,7 @@
 }
 
 .button {
-  height: 9%;
+  height: 18%;
   margin-top: 20px;
   margin-left: auto;
   border: 2px gray solid;
@@ -223,7 +223,8 @@ function hint() {
   if (how_many > anuvaad.length) {
     how_many = anuvaad.length;
   }
-  document.getElementById("hint-response").value = anuvaad.substr(0, how_many);
+  var blanks = anuvaad.length - how_many;
+  document.getElementById("hint-response").value = anuvaad.substr(0, how_many) + "_".repeat(blanks);
   add_to_hint++;
 }
 
