@@ -1,0 +1,593 @@
+<svg
+    version="1.1"
+    viewBox="-10 -10 1020 2020"
+    preserveAspectRatio="xMidYMid"
+    xmlns="http://www.w3.org/2000/svg"
+    style="stroke-width: 5;"
+    onload="run();">
+  <defs>
+    <path id="s" d="M 5 5 L 5 95 L 95 95 L 95 5 Z" stroke="black" />
+  </defs>
+
+  <rect
+    id="shade"
+    x="0"
+    y="0"
+    width="100"
+    height="2000"
+    fill="lightgray"
+    fill-opacity="25%"
+    stroke="lightgray"
+    stroke-dasharray="16" />
+
+  <rect
+    id="outline"
+    x="0"
+    y="0"
+    width="1000"
+    height="2000"
+    fill="none"
+    stroke="gray" />
+
+  <g id="board">
+    <g id="filled">
+    </g>
+  </g>
+
+  <rect
+    id="game-over"
+    x="0"
+    y="0"
+    width="1000"
+    height="2000"
+    fill="gray"
+    fill-opacity="75%"
+    stroke="none"
+    display="none" />
+
+  <script><![CDATA[
+
+// parameters for you to set
+
+const drag_scale_x = 1.5;
+const drag_scale_y = 0.5;
+const step_rate_ms = 500;
+
+// model
+
+const falling_types = ["I", "J", "L", "O", "S", "T", "Z"];
+var falling_type = "";
+var falling_rot = -1;
+var falling_x = 300;
+var falling_y = 0;
+var falling_min_x = -1;
+var falling_max_x = -1;
+
+var dragging = false;
+var start_drag_x = -1;
+var start_drag_y = -1;
+var start_falling_rot = -1;
+var start_falling_x = -1;
+var done = false;
+
+var filled_array = [
+    [false, false, false, false, false, false, false, false, false, false],  //  0
+    [false, false, false, false, false, false, false, false, false, false],  //  1
+    [false, false, false, false, false, false, false, false, false, false],  //  2
+    [false, false, false, false, false, false, false, false, false, false],  //  3
+    [false, false, false, false, false, false, false, false, false, false],  //  4
+    [false, false, false, false, false, false, false, false, false, false],  //  5
+    [false, false, false, false, false, false, false, false, false, false],  //  6
+    [false, false, false, false, false, false, false, false, false, false],  //  7
+    [false, false, false, false, false, false, false, false, false, false],  //  8
+    [false, false, false, false, false, false, false, false, false, false],  //  9
+    [false, false, false, false, false, false, false, false, false, false],  // 10
+    [false, false, false, false, false, false, false, false, false, false],  // 11
+    [false, false, false, false, false, false, false, false, false, false],  // 12
+    [false, false, false, false, false, false, false, false, false, false],  // 13
+    [false, false, false, false, false, false, false, false, false, false],  // 14
+    [false, false, false, false, false, false, false, false, false, false],  // 15
+    [false, false, false, false, false, false, false, false, false, false],  // 16
+    [false, false, false, false, false, false, false, false, false, false],  // 17
+    [false, false, false, false, false, false, false, false, false, false],  // 18
+    [false, false, false, false, false, false, false, false, false, false],  // 19
+    [ true,  true,  true,  true,  true,  true,  true,  true,  true,  true],  // underground
+    [ true,  true,  true,  true,  true,  true,  true,  true,  true,  true],
+    [ true,  true,  true,  true,  true,  true,  true,  true,  true,  true],
+    [ true,  true,  true,  true,  true,  true,  true,  true,  true,  true],
+];
+
+// view
+
+const SVG_NS ="http://www.w3.org/2000/svg";
+var shade = null;
+var board = null;
+var filled = null;
+var falling = null;
+var intervalId = null;
+
+// controller
+
+function position_is_allowed() {
+    const i0 = falling_y / 100;
+    const j0 = falling_x / 100;
+    const shape = shape_pattern[falling_type + falling_rot];
+    for (let i = 0;  i < 4;  i++) {
+        for (let j = 0;  j < 4;  j++) {
+            if (shape[i][j]  &&  filled_array[i0 + i][j0 + j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function absorb() {
+    for (let n = 0;  n < falling.childNodes.length;  n++) {
+        const old_square = falling.childNodes[n];
+        const x = parseInt(old_square.getAttribute("x")) + falling_x;
+        const y = parseInt(old_square.getAttribute("y")) + falling_y;
+
+        const i = y / 100;
+        const j = x / 100;
+        filled_array[i][j] = true;
+
+        var new_square = document.createElementNS(SVG_NS, "use");
+        new_square.setAttribute("id", i + "." + j);
+        new_square.setAttribute("x", x);
+        new_square.setAttribute("y", y);
+        new_square.setAttribute("href", "#s");
+        new_square.setAttribute("fill", shape_color[falling_type]);
+        filled.appendChild(new_square);
+    }
+}
+
+function clear_lines() {
+    for (let i = 19;  i >= 0;  i--) {
+        all_filled = true;
+        for (let j = 0;  j < 10;  j++) {
+            if (!filled_array[i][j]) {
+                all_filled = false;
+                break;
+            }
+        }
+
+        if (all_filled) {
+            console.log("clearing " + i);
+
+            for (let j = 0;  j < 10;  j++) {
+                filled_array[i][j] = false;
+                document.getElementById(i + "." + j).remove();
+            }
+            for (let i2 = i - 1;  i2 >= 0;  i2--) {
+                for (let j = 0;  j < 10;  j++) {
+                    filled_array[i2 + 1][j] = filled_array[i2][j];
+                    var square = document.getElementById(i2 + "." + j);
+                    if (square !== null) {
+                        square.setAttribute(
+                            "y", parseInt(square.getAttribute("y")) + 100
+                        );
+                        square.setAttribute("id", (i2 + 1) + "." + j);
+                    }
+                }
+            }
+            for (let j = 0;  j < 10;  j++) {
+                filled_array[0][j] = false;
+            }
+
+            i += 1;
+        }
+    }
+}
+
+function new_falling() {
+    dragging = false;
+
+    falling_type = falling_types[Math.floor(Math.random() * 7)];
+    falling_rot = Math.floor(Math.random() * 4);
+    falling = document.createElementNS(SVG_NS, "g");
+    falling.setAttribute("fill", shape_color[falling_type]);
+    board.appendChild(falling);
+
+    falling_y = 0;
+    redraw_falling();
+
+    if (!position_is_allowed()) {
+        clearInterval(intervalId);
+        shade.style = "display: none;";
+        document.getElementById("game-over").style.display = "block";
+        done = true;
+    }
+}
+
+function shade_pos_in_window() {
+    const shade_width = 100 + falling_max_x - falling_min_x;
+    const shade_pos = Math.min(
+        1000 - shade_width,
+        Math.max(0, falling_x + falling_min_x)
+    );
+    falling_x = shade_pos - falling_min_x;
+
+    return [shade_pos, shade_width];
+}
+
+function redraw_falling() {
+    const falling_type_rot = falling_type + falling_rot;
+
+    while (falling.firstChild) {
+        falling.removeChild(falling.firstChild);
+    }
+
+    const shape = shape_pattern[falling_type_rot];
+    falling_min_x = 400;
+    falling_max_x = 0;
+    for (let i = 0;  i < 4;  i++) {
+        for (let j = 0;  j < 4;  j++) {
+            if (shape[i][j]) {
+                var square = document.createElementNS(SVG_NS, "use");
+                const x = j * 100;
+                const y = i * 100;
+                if (x < falling_min_x) {
+                    falling_min_x = x;
+                }
+                if (x > falling_max_x) {
+                    falling_max_x = x;
+                }
+                square.setAttribute("x", x);
+                square.setAttribute("y", y);
+                square.setAttribute("href", "#s");
+                falling.appendChild(square);
+            }
+        }
+    }
+
+    const [shade_pos, shade_width] = shade_pos_in_window();
+
+    shade.setAttribute("x", shade_pos);
+    shade.setAttribute("width", shade_width);
+    falling.setAttribute(
+        "transform", "translate(" + falling_x + "," + falling_y + ")"
+    );
+}
+
+function step() {
+    falling_y += 100;
+
+    if (!position_is_allowed()) {
+        falling_y -= 100;
+
+        absorb();
+        falling.remove();
+        clear_lines();
+        new_falling();
+    }
+    else {
+        falling.setAttribute(
+            "transform", "translate(" + falling_x + "," + falling_y + ")"
+        );
+    }
+}
+
+function drop() {
+    do {
+        falling_y += 100;
+    } while (position_is_allowed());
+
+    falling_y -= 100;
+
+    absorb();
+    falling.remove();
+    clear_lines();
+    new_falling();
+}
+
+function global_position(event) {
+    var loc = new DOMPoint();
+    if (event.touches === undefined) {
+        loc.x = event.clientX;
+        loc.y = event.clientY;
+    }
+    else {
+        loc.x = event.touches[0].clientX;
+        loc.y = event.touches[0].clientY;
+    }
+
+    return loc.matrixTransform(shade.getScreenCTM().inverse());
+}
+
+function handle_start(event) {
+    if (done) {
+        return;
+    }
+
+    dragging = true;
+
+    const glob = global_position(event);
+    start_drag_x = glob.x;
+    start_drag_y = glob.y;
+    start_falling_rot = falling_rot;
+    start_falling_x = falling_x;
+}
+
+function handle_move(event) {
+    if (!dragging) {
+        return;
+    }
+
+    const glob = global_position(event);
+
+    const old_falling_rot = falling_rot;
+    falling_rot = start_falling_rot + Math.round(
+        (glob.y - start_drag_y) * drag_scale_y * 0.01
+    );
+    while (falling_rot > 3) {
+        falling_rot = falling_rot - 4;
+    }
+    while (falling_rot < 0) {
+        falling_rot = falling_rot + 4;
+    }
+
+    if (falling_rot != old_falling_rot) {
+        redraw_falling();
+        if (!position_is_allowed()) {
+            falling_rot = old_falling_rot;
+            redraw_falling();
+        }
+    }
+
+    const target_falling_x = Math.round(
+        (start_falling_x + (glob.x - start_drag_x) * drag_scale_x) * 0.01
+    ) * 100;
+
+    if (target_falling_x == falling_x) {
+        return;
+    }
+
+    const old_falling_x = falling_x;
+    var shade_pos = -1;
+    var shade_width = -1;
+    const step_falling_x = falling_x < target_falling_x ? 100 : -100;
+    do {
+        const prev_falling_x = falling_x;
+
+        falling_x += step_falling_x;
+        [shade_pos, shade_width] = shade_pos_in_window();
+        if (falling_x == prev_falling_x) {
+            break;
+        }
+
+        if (!position_is_allowed()) {
+            falling_x = prev_falling_x;
+            break;
+        }
+    } while (falling_x != target_falling_x);
+
+    if (falling_x != old_falling_x) {
+        shade.setAttribute("x", shade_pos);
+        shade.setAttribute("width", shade_width);
+        falling.setAttribute(
+            "transform", "translate(" + falling_x + "," + falling_y + ")"
+        );
+    }
+}
+
+function handle_stop(event) {
+    dragging = false;
+
+    const glob = global_position(event);
+
+    const final_x = Math.round((glob.x - start_drag_x) * drag_scale_x * 0.01) * 100;
+    const final_y = Math.round((glob.y - start_drag_y) * drag_scale_y * 0.01) * 100;
+
+    if (final_x == 0  &&  final_y == 0) {
+        drop();
+    }
+}
+
+function run() {
+    shade = document.getElementById("shade");
+    board = document.getElementById("board");
+    filled = document.getElementById("filled");
+    new_falling();
+
+    document.addEventListener("mousedown", handle_start);
+    document.addEventListener("touchstart", handle_start);
+    document.addEventListener("mousemove", handle_move);
+    document.addEventListener("touchmove", handle_move);
+    document.addEventListener("mouseup", handle_stop);
+    document.addEventListener("touchend", handle_stop);
+
+    intervalId = setInterval(step, step_rate_ms);
+}
+
+// constants
+
+const shape_color = {
+    "I": "lightblue",
+    "J": "dodgerblue",
+    "L": "orange",
+    "O": "yellow",
+    "S": "limegreen",
+    "T": "mediumpurple",
+    "Z": "salmon",
+};
+
+const shape_pattern = {
+    "I0": [
+        [false, false, false, false],
+        [ true,  true,  true,  true],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "I1": [
+        [false, false,  true, false],
+        [false, false,  true, false],
+        [false, false,  true, false],
+        [false, false,  true, false],
+    ],
+    "I2": [
+        [false, false, false, false],
+        [false, false, false, false],
+        [ true,  true,  true,  true],
+        [false, false, false, false],
+    ],
+    "I3": [
+        [false,  true, false, false],
+        [false,  true, false, false],
+        [false,  true, false, false],
+        [false,  true, false, false],
+    ],
+
+    "J0": [
+        [ true, false, false, false],
+        [ true,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "J1": [
+        [false,  true,  true, false],
+        [false,  true, false, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+    "J2": [
+        [false, false, false, false],
+        [ true,  true,  true, false],
+        [false, false,  true, false],
+        [false, false, false, false],
+    ],
+    "J3": [
+        [false,  true, false, false],
+        [false,  true, false, false],
+        [ true,  true, false, false],
+        [false, false, false, false],
+    ],
+
+    "L0": [
+        [false, false,  true, false],
+        [ true,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "L1": [
+        [false,  true, false, false],
+        [false,  true, false, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+    ],
+    "L2": [
+        [false, false, false, false],
+        [ true,  true,  true, false],
+        [ true, false, false, false],
+        [false, false, false, false],
+    ],
+    "L3": [
+        [ true,  true, false, false],
+        [false,  true, false, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+
+    "O0": [
+        [false,  true,  true, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "O1": [
+        [false,  true,  true, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "O2": [
+        [false,  true,  true, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "O3": [
+        [false,  true,  true, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+
+    "S0": [
+        [false,  true,  true, false],
+        [ true,  true, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "S1": [
+        [false,  true, false, false],
+        [false,  true,  true, false],
+        [false, false,  true, false],
+        [false, false, false, false],
+    ],
+    "S2": [
+        [false, false, false, false],
+        [false,  true,  true, false],
+        [ true,  true, false, false],
+        [false, false, false, false],
+    ],
+    "S3": [
+        [ true, false, false, false],
+        [ true,  true, false, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+
+    "T0": [
+        [false,  true, false, false],
+        [ true,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "T1": [
+        [false,  true, false, false],
+        [false,  true,  true, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+    "T2": [
+        [false, false, false, false],
+        [ true,  true,  true, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+    "T3": [
+        [false,  true, false, false],
+        [ true,  true, false, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+
+    "Z0": [
+        [ true,  true, false, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+        [false, false, false, false],
+    ],
+    "Z1": [
+        [false, false,  true, false],
+        [false,  true,  true, false],
+        [false,  true, false, false],
+        [false, false, false, false],
+    ],
+    "Z2": [
+        [false, false, false, false],
+        [ true,  true, false, false],
+        [false,  true,  true, false],
+        [false, false, false, false],
+    ],
+    "Z3": [
+        [false,  true, false, false],
+        [ true,  true, false, false],
+        [ true, false, false, false],
+        [false, false, false, false],
+    ],
+};
+
+  ]]></script>
+</svg>
