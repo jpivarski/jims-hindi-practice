@@ -3,7 +3,7 @@
     viewBox="-10 -10 1020 2020"
     preserveAspectRatio="xMidYMid"
     xmlns="http://www.w3.org/2000/svg"
-    style="stroke-width: 5;"
+    style="stroke-width: 5; touch-action: manipulation; overscroll-behavior: none;"
     onload="run();">
   <defs>
     <path id="s" d="M 5 5 L 5 95 L 95 95 L 95 5 Z" stroke="black" />
@@ -15,10 +15,15 @@
     y="0"
     width="100"
     height="2000"
-    fill="lightgray"
-    fill-opacity="25%"
+    fill="whitesmoke"
     stroke="lightgray"
     stroke-dasharray="16" />
+
+  <path
+    id="bottom-shade"
+    d=""
+    fill="none"
+    stroke="lightgray" />
 
   <rect
     id="outline"
@@ -34,16 +39,41 @@
     </g>
   </g>
 
+  <text
+    x="10"
+    y="10"
+    text-anchor="start"
+    style="dominant-baseline: hanging; font-size: 60; font-family: sans-serif; fill: gray;">next:</text>
+
+  <text
+    id="next"
+    x="0"
+    y="0"
+    text-anchor="start"
+    style="dominant-baseline: hanging; font-size: 15; font-family: monospace; fill: white">
+    <tspan id="next-1" x="160" dy="15">█‏‏‎ ‎█‏‏‎ ‎</tspan>
+    <tspan id="next-2" x="160" dy="15">‏‏‎ ‎█‏‏‎ ‎█</tspan>
+    <tspan id="next-3" x="160" dy="15">█‏‏‎ ‎█‏‏‎ ‎</tspan>
+    <tspan id="next-4" x="160" dy="15">‏‏‎ ‎█‏‏‎ ‎█</tspan>
+  </text>
+
   <rect
     id="game-over"
     x="0"
     y="0"
     width="1000"
     height="2000"
-    fill="gray"
+    fill="black"
     fill-opacity="75%"
     stroke="none"
     display="none" />
+
+  <text
+    id="score"
+    x="990"
+    y="10"
+    text-anchor="end"
+    style="dominant-baseline: hanging; font-size: 60; font-family: sans-serif; fill: gray;">score: 0</text>
 
   <script><![CDATA[
 
@@ -53,11 +83,14 @@ const drag_scale_x = 1.5;
 const drag_scale_y = 0.75;
 const initial_rate_ms = 500;
 const rate_factor_per_clear = 0.99;
-const drop_cooldown_ms = 500;
+const rate_factor_during_pull = 0.75;
+const tap_cooldown_ms = 100;
+const rotate_vs_drop_threshold = 1700;
 
 // model
 
 const falling_types = ["I", "J", "L", "O", "S", "T", "Z"];
+var next_falling_type = "";
 var falling_type = "";
 var falling_rot = -1;
 var falling_x = 300;
@@ -71,8 +104,10 @@ var start_drag_x = -1;
 var start_drag_y = -1;
 var start_falling_rot = -1;
 var start_falling_x = -1;
-var time_since_last_drop = -1;
+var time_since_last_tap = -1;
 var current_rate_ms = initial_rate_ms;
+var current_pull_rate_ms = initial_rate_ms;
+var score = 0;
 var done = false;
 
 var filled_array = [
@@ -190,14 +225,49 @@ function clear_lines() {
         clearInterval(intervalId);
         current_rate_ms *= rate_factor_per_clear;
         intervalId = setInterval(step, current_rate_ms);
+
+        score += cleared_lines;
+        document.getElementById("score").textContent = "score: " + score;
     }
 }
 
+function restore_rate() {
+    if (current_pull_rate_ms != current_rate_ms) {
+        current_pull_rate_ms = current_rate_ms;
+        clearInterval(intervalId);
+        intervalId = setInterval(step, current_rate_ms);
+    }
+}
+
+function update_next() {
+    var next1_text = "";
+    var next2_text = "";
+    var next3_text = "";
+    var next4_text = "";
+    for (let j = 0;  j < 4;  j++) {
+        next1_text += shape_pattern[next_falling_type + "0"][0][j] ? "█" : "‏‏‎ ‎";
+        next2_text += shape_pattern[next_falling_type + "0"][1][j] ? "█" : "‏‏‎ ‎";
+        next3_text += shape_pattern[next_falling_type + "0"][2][j] ? "█" : "‏‏‎ ‎";
+        next4_text += shape_pattern[next_falling_type + "0"][3][j] ? "█" : "‏‏‎ ‎";
+    }
+    document.getElementById("next-1").textContent = next1_text;
+    document.getElementById("next-2").textContent = next2_text;
+    document.getElementById("next-3").textContent = next3_text;
+    document.getElementById("next-4").textContent = next4_text;
+
+    document.getElementById("next").style.fill = shape_color[next_falling_type];
+}
+
 function new_falling() {
+    restore_rate();
     dragging = false;
     excursion = false;
+    time_since_last_tap = performance.now();
 
-    falling_type = falling_types[Math.floor(Math.random() * 7)];
+    falling_type = next_falling_type;
+    next_falling_type = falling_types[Math.floor(Math.random() * 7)];
+    update_next();
+
     falling_rot = Math.floor(Math.random() * 4);
     falling = document.createElementNS(SVG_NS, "g");
     falling.setAttribute("fill", shape_color[falling_type]);
@@ -210,6 +280,7 @@ function new_falling() {
         clearInterval(intervalId);
         shade.style = "display: none;";
         document.getElementById("game-over").style.display = "block";
+        document.getElementById("score").style.fill = "white";
         done = true;
     }
 }
@@ -226,6 +297,10 @@ function shade_pos_in_window() {
 }
 
 function redraw_falling() {
+    if (done) {
+        return;
+    }
+
     const falling_type_rot = falling_type + falling_rot;
 
     while (falling.firstChild) {
@@ -283,11 +358,6 @@ function step() {
 }
 
 function drop() {
-    var now = performance.now();
-    if (time_since_last_drop != -1  &&  now - time_since_last_drop < drop_cooldown_ms) {
-        return;
-    }
-
     do {
         falling_y += 100;
     } while (position_is_allowed());
@@ -298,8 +368,6 @@ function drop() {
     falling.remove();
     clear_lines();
     new_falling();
-
-    time_since_last_drop = now;
 }
 
 function global_position(event) {
@@ -331,7 +399,7 @@ function handle_start(event) {
 }
 
 function handle_move(event) {
-    if (!dragging) {
+    if (!dragging  ||  done) {
         return;
     }
 
@@ -343,23 +411,13 @@ function handle_move(event) {
         excursion = true;
     }
 
-    const old_falling_rot = falling_rot;
-    falling_rot = start_falling_rot + Math.round(
-        (glob.y - start_drag_y) * drag_scale_y * 0.01
+    const new_current_pull_rate_ms = current_rate_ms * Math.pow(
+        rate_factor_during_pull, Math.max(0, final_y * 0.01)
     );
-    while (falling_rot > 3) {
-        falling_rot -= 4;
-    }
-    while (falling_rot < 0) {
-        falling_rot += 4;
-    }
-
-    if (falling_rot != old_falling_rot) {
-        redraw_falling();
-        if (!position_is_allowed()) {
-            falling_rot = old_falling_rot;
-            redraw_falling();
-        }
+    if (new_current_pull_rate_ms != current_pull_rate_ms) {
+        current_pull_rate_ms = new_current_pull_rate_ms;
+        clearInterval(intervalId);
+        intervalId = setInterval(step, current_pull_rate_ms);
     }
 
     const target_falling_x = Math.round(
@@ -400,11 +458,48 @@ function handle_move(event) {
 
 function handle_stop(event) {
     if (!excursion) {
-        drop();
+        var now = performance.now();
+        if (time_since_last_tap != -1  &&  now - time_since_last_tap < tap_cooldown_ms) {
+            return;
+        }
+
+        if (start_drag_y > rotate_vs_drop_threshold) {
+            drop();
+        }
+        else if (start_drag_x > 500) {
+            falling_rot++;
+            if (falling_rot == 4) {
+                falling_rot = 0;
+            }
+            redraw_falling();
+            if (!position_is_allowed()) {
+                falling_rot--;
+                if (falling_rot == -1) {
+                    falling_rot = 3;
+                }
+            }
+        }
+        else {
+            falling_rot--;
+            if (falling_rot == -1) {
+                falling_rot = 3;
+            }
+            redraw_falling();
+            if (!position_is_allowed()) {
+                falling_rot++;
+                if (falling_rot == 4) {
+                    falling_rot = 0;
+                }
+            }
+        }
+
+        time_since_last_tap = now;
     }
 
+    restore_rate();
     dragging = false;
     excursion = false;
+    time_since_last_tap = performance.now();
 }
 
 function do_horizontal(shift) {
@@ -429,15 +524,19 @@ function do_horizontal(shift) {
 function do_left() {
     do_horizontal(-100);
 
+    restore_rate();
     dragging = false;
     excursion = false;
+    time_since_last_tap = performance.now();
 }
 
 function do_right() {
     do_horizontal(100);
 
+    restore_rate();
     dragging = false;
     excursion = false;
+    time_since_last_tap = performance.now();
 }
 
 function do_up() {
@@ -453,15 +552,24 @@ function do_up() {
         }
     }
 
+    restore_rate();
     dragging = false;
     excursion = false;
+    time_since_last_tap = performance.now();
 }
 
 function do_down() {
+    var now = performance.now();
+    if (time_since_last_tap != -1  &&  now - time_since_last_tap < tap_cooldown_ms) {
+        return;
+    }
     drop();
+    time_since_last_tap = now;
 
+    restore_rate();
     dragging = false;
     excursion = false;
+    time_since_last_tap = performance.now();
 }
 
 function handle_key(event) {
@@ -501,9 +609,17 @@ function handle_key(event) {
 }
 
 function run() {
+    var bottom_shade = document.getElementById("bottom-shade");
+    var y = rotate_vs_drop_threshold;
+    bottom_shade.setAttribute(
+        "d", "M 0 " + y + " L 50 " + y + " M 1000 " + y + " L 950 " + y
+    );
+
     shade = document.getElementById("shade");
     board = document.getElementById("board");
     filled = document.getElementById("filled");
+
+    next_falling_type = falling_types[Math.floor(Math.random() * 7)];
     new_falling();
 
     document.addEventListener("mousedown", handle_start);
