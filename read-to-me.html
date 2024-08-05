@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Read To Me</title>
+    <style>
+      * { font-size: 20pt; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+  <form id="settings">
+    <div id="freeze" style="border: 1px solid black; padding: 2px;">
+      <video id="video" width="100%" autoplay="true"></video>
+      <canvas id="canvas" width="100%" style="overflow: auto; display: none;"></canvas>
+    </div>
+    <div style="margin-top: 30px;">
+      <div id="response" style="width: 100%" onclick="return say();">(Recognized text goes here...)</div>
+    </div>
+  </form>
+
+  <script>
+window.addEventListener("load", function(event) {
+    let video = document.getElementById("video");
+    if (navigator.mediaDevices  &&  navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}})
+            .then(function (stream) {
+                video.srcObject = stream;
+            });
+    }
+});
+  </script>
+
+  <script type="module">
+
+const worker = await Tesseract.createWorker("eng", 1, {
+    logger: function(m) { console.log(m); }
+});
+
+var image_string = null;
+
+document.getElementById("freeze").addEventListener("click", async () => {
+try {
+    let freeze = document.getElementById("freeze");
+    let response = document.getElementById("response");
+
+    if (image_string == null) {
+        let video = document.getElementById("video");
+        let canvas = document.getElementById("canvas");
+
+        canvas.style.display = "block";
+        if (video.videoWidth < video.videoHeight) {
+            canvas.width = 768;
+            canvas.height = canvas.width * video.videoHeight / video.videoWidth;
+        }
+        else {
+            canvas.height = 768;
+            canvas.width = canvas.height * video.videoWidth / video.videoHeight;
+        }
+        canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        image_string = canvas.toDataURL();
+        freeze.innerHTML = '<img src="' + image_string + '" width="100%">';
+
+        let ret = await worker.recognize(image_string);
+
+        document.getElementById("response").innerText = ret.data.text;
+
+        speak(ret.data.text);
+    }
+
+} catch (error) {
+    console.error('Error:', error);
+}
+
+});
+
+function speak(message) {
+    var utterance = new SpeechSynthesisUtterance();
+    utterance.text = message;
+    utterance.lang = "en-US";
+    window.speechSynthesis.speak(utterance);
+}
+
+function say() {
+    speak(document.getElementById("response").innerText);
+}
+
+  </script>
+
+</body>
+</html>
